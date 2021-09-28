@@ -3,8 +3,8 @@
 import "prelude.eg"
 import "io.ego"
 
-include System
-include List
+using System
+using List
 
 # constants with all source code locations
 
@@ -31,3 +31,5 @@ val preludes = {
 
 val sources = builtins ++ (modules ++ preludes)
 
+def main =
+	sources
