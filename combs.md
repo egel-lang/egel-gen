@@ -444,9 +444,9 @@
 
  + `System:elem` *x l* - membership test
 
- + `System:elem` *x l* - inverse membership test
+ + `System:notelem` *x l* - inverse membership test
 
- + `System:elem` *x l* - union of two lists (nˆ2 complexity)
+ + `System:union` *x l* - union of two lists (nˆ2 complexity)
 
  + `System:insertEverywhere` *x l* - insert a member in every position of a list
 
