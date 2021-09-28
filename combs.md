@@ -388,3 +388,69 @@
 
  + `System:or` *p q* - boolean or
 
+ + `System:and` *p q* - boolean and
+
+ + `System:not` *p q* - boolean not
+
+ + `System:.` *f g* - function composition
+
+ + `System:flip` *f x y* - flip two arguments
+
+ + `System:uncurry` *f (x, y)* - uncurry arguments
+
+ + `System:fst` *(x, y)* - proj0 on pair
+
+ + `System:snd` *(x, y)* - proj1 on pair
+
+ + `System:length` *l* - length of a list
+
+ + `System:foldl` *f z l* - left fold on a list
+
+ + `System:foldr` *f z l* - right fold on a list
+
+ + `System:head` *l* - head of a list
+
+ + `System:tail` *l* - tail of a list
+
+ + `System:++` *l0 l1* - concatenation of two lists
+
+ + `System:map` *f l* - map a function over a list
+
+ + `System:reverse` *l* - reverse a list
+
+ + `System:block` *n* - list of number from 0 to n exclusive
+
+ + `System:nth` *n l* - nth element of a list
+
+ + `System:insert` *n x l* - insert an element at given position
+
+ + `System:take` *n l* - take the first n elements of a list
+
+ + `System:drop` *n l* - drop the first n elements of a list
+
+ + `System:fromto` *min max* - list of numbers for min to max (exclusive)
+
+ + `System:filter` *p l* - filter all members from a list which satisfy a predicate
+
+ + `System:flatten` *ll* - flatten a list of lists to a list
+
+ + `System:zip` *l0 l1* - zip to lists to a list of pairs
+
+ + `System:zipwith` *f l0 l1* - apply a function pairwise to members of two lists
+
+ + `System:any` *p l* - checks whether any element of a list satisfies a predicate
+
+ + `System:all` *p l* - checks whether all elements of a list  satisfies a predicate
+
+ + `System:elem` *x l* - membership test
+
+ + `System:elem` *x l* - inverse membership test
+
+ + `System:elem` *x l* - union of two lists (nˆ2 complexity)
+
+ + `System:insertEverywhere` *x l* - insert a member in every position of a list
+
+ + `System:concatMap` *f l* - concat map
+
+ + `System:permutations` *l* - all permutations of a list
+
