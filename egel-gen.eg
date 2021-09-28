@@ -62,7 +62,7 @@ def filter_doc =
     [ (source FN LL) ->
         source FN (filter (Regex:match regex_comment) LL) ]
 
-# generate a short markdown document
+# extract combinator declarations
 
 data comb
 
@@ -76,10 +76,27 @@ def line_to_comb =
 def source_to_comb =
     [ (source FN LL) -> source FN (map line_to_comb LL) ]
 
+# generate a short markdown document
+
+def comb_to_md =
+    [ (comb A B C D) -> print (format " + `{}:{}` {}\n   {}\n\n" A B C D)
+    | _ -> nop ]
+
+def source_to_md =
+    [ (source FN CC) ->
+	print (format "## <{}>\n\n" FN);
+        map comb_to_md CC ]
+
+def sources_to_md =
+    [ CC -> 
+	print "# Egel interpreter builtin combinators\n\n";
+	map source_to_md CC;
+	nop ]
+
 # tying it all together
 
 def main =
     let DD = map file_input sources in
     let DD = map filter_doc DD in
     let CC = map source_to_comb DD in
-        CC
+        sources_to_md CC
