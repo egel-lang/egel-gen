@@ -41,7 +41,7 @@ data source
 def file_check =
     [ FN -> 
 	if OS:exists FN 
-	then print (format "reading file {}\n" FN) 
+	then nop # print (format "reading file {}\n" FN) 
 	else throw (format "didn't find file {}" FN) ]
 
 def file_readlines =
@@ -79,7 +79,7 @@ def source_to_comb =
 # generate a short markdown document
 
 def comb_to_md =
-    [ (comb A B C D) -> print (format " + `{}:{}` {}\n   {}\n\n" A B C D)
+    [ (comb A B C D) -> print (format " + `{}:{}` *{}* - {}\n\n" A B C D)
     | _ -> nop ]
 
 def source_to_md =
