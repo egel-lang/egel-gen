@@ -3,6 +3,7 @@
 import "prelude.eg"
 import "os.ego"
 import "fs.ego"
+import "regex.ego"
 
 using System
 using List
@@ -52,5 +53,21 @@ def file_input =
         file_check FN;
         source FN (file_readlines (OS:open FN)) ]
 
+# regex to match against a documentation comment
+
+def regex_comment = "\\/\\/##.*"
+
+val regex_pattern = Regex:compile regex_comment
+
+def filter_doc =
+    [ nil -> nil
+    | cons (source FN LL) DD ->
+	let LL = filter (Regex:match regex_pattern) LL in
+	cons (source FN LL) (filter_doc DD) ]
+
+# tying it all together
+
 def main =
-    map file_input sources
+    let DD = map file_input sources in
+    let DD = filter_doc DD in
+        DD
