@@ -43,7 +43,9 @@ def file_check =
 	else throw (format "didn't find file {}" FN) ]
 
 def file_readlines =
-    [ FS -> FS ]
+    [ FS ->
+        let L = OS:read_line FS in
+        if OS:eof FS then nil else cons L (file_readlines FS) ]
 
 def file_input =
     [ FN ->
