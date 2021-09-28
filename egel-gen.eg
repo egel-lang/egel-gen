@@ -1,3 +1,4 @@
+#!/usr/bin/env egel
 # Egel combinator documentation extractor.
 
 import "prelude.eg"
@@ -60,14 +61,12 @@ def regex_comment = "\\/\\/##.*"
 val regex_pattern = Regex:compile regex_comment
 
 def filter_doc =
-    [ nil -> nil
-    | cons (source FN LL) DD ->
-	let LL = filter (Regex:match regex_pattern) LL in
-	cons (source FN LL) (filter_doc DD) ]
+    [ (source FN LL) ->
+        source FN (filter (Regex:match regex_pattern) LL) ]
 
 # tying it all together
 
 def main =
     let DD = map file_input sources in
-    let DD = filter_doc DD in
+    let DD = map filter_doc DD in
         DD
