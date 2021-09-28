@@ -5,6 +5,7 @@ import "io.ego"
 
 using System
 using List
+using IO
 
 # constants with all source code locations
 
@@ -30,6 +31,20 @@ val preludes = {
 }
 
 val sources = builtins ++ (modules ++ preludes)
+
+# read in sources
+
+def check_file =
+    [ FN -> 
+	if file_exists FN 
+	then print (format "reading file {}\n" FN) 
+	else throw (format "didn't find file {}" FN) ]
+
+def read_file =
+    [ FN ->
+        check_file FN;
+        nop ]
+
 
 def main =
 	sources
