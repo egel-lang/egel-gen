@@ -54,19 +54,32 @@ def file_input =
         file_check FN;
         source FN (file_readlines (OS:open FN)) ]
 
-# regex to match against a documentation comment
+# filter with a regex match against a documentation comment
 
-def regex_comment = "\\/\\/##.*"
-
-val regex_pattern = Regex:compile regex_comment
+val regex_comment = Regex:compile "(?:(?: *)|(?:\\/\\/))##.*"
 
 def filter_doc =
     [ (source FN LL) ->
-        source FN (filter (Regex:match regex_pattern) LL) ]
+        source FN (filter (Regex:match regex_comment) LL) ]
+
+# generate a short markdown document
+
+data comb
+
+val regex_combinator = Regex:compile "(?:(?: *)|(?:\\/\\/))## +([^ ]*):([^ ]*) (.*) - (.*)"
+
+def line_to_comb =
+    [ L ->
+        let CC = Regex:group regex_combinator L in
+        [ {A,B,C,D} -> comb A B C D | _ -> comb ] CC ]
+
+def source_to_comb =
+    [ (source FN LL) -> source FN (map line_to_comb LL) ]
 
 # tying it all together
 
 def main =
     let DD = map file_input sources in
     let DD = map filter_doc DD in
-        DD
+    let CC = map source_to_comb DD in
+        CC
