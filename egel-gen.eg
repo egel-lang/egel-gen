@@ -1,0 +1,33 @@
+# Egel combinator documentation extractor.
+
+import "prelude.eg"
+import "io.ego"
+
+include System
+include List
+
+# constants with all source code locations
+
+val builtins = { 
+	"egel/src/builtin_system.hpp",
+	"egel/src/builtin_math.hpp",
+	"egel/src/builtin_eval.hpp",
+	"egel/src/builtin_string.hpp",
+	"egel/src/builtin_eval.hpp",
+	"egel/src/builtin_thread.hpp",
+	"egel/src/builtin_process.hpp"
+}
+
+val modules = {
+	"egel/lib/io/io.hpp",
+	"egel/lib/fs/fs.hpp",
+	"egel/lib/regex/regex.hpp",
+	"egel/lib/random/random.hpp"
+}
+
+val preludes = {
+	"egel/include/prelude.eg"
+}
+
+val sources = builtins ++ (modules ++ preludes)
+
