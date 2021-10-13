@@ -224,7 +224,7 @@
 
  + `System:proc` *f* - create a process object from f
 
- + `System:send` *msg proc* - send proc a message msg
+ + `System:send` *proc msg* - send message msg to proc
 
  + `System:recv` *proc* - receive a message from process proc
 
