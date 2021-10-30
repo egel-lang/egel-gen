@@ -478,7 +478,7 @@
 
  + `Search:message` *m* - fail or raise with message m
 
- + `Search:nofail` *p* - this search may not fail
+ + `Search:no_fail` *p* - this search may not fail
 
  + `Search:parallel` *p q* - try alternatives p or q
 
@@ -488,7 +488,7 @@
 
  + `Search:opt` *p v* - optionally succeed p with value v
 
- + `Search:serialopt` *p q* - optionally succeed p with value v
+ + `Search:serial_opt` *p q* - optionally succeed p with value v
 
  + `Search:<+>` *p q* - try alternatives p or q
 
