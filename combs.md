@@ -44,11 +44,11 @@
 
  + `System:extend` *obj0 obj1* - extend object obj0 with every field from obj1
 
- + `System:toint` *x* - Try and convert an object to int
+ + `System:to_int` *x* - Try and convert an object to int
 
- + `System:tofloat` *x* - try and convert an object to float
+ + `System:to_float` *x* - try and convert an object to float
 
- + `System:totext` *x* - try and convert an object to text
+ + `System:to_text` *x* - try and convert an object to text
 
  + `System:ref` *x* - create a reference object from x
 
@@ -60,13 +60,9 @@
 
  + `System:pack` *s* - create a string from a list of code points
 
- + `System:dis` *o* - disassemble a combinator object
-
- + `System:asm` *s0 s1* - assemble bytecode into a combinator
-
  + `System:arg` *n* - return the n-th application argument, otherwise return 'nop'
 
- + `System:getenv` *s* - return the value of environment variable s, otherwise return 'nop'
+ + `System:get_env` *s* - return the value of environment variable s, otherwise return 'nop'
 
  + `System:print` *o0 .. on* - print terms, don't escape characters or texts 
 
@@ -178,7 +174,7 @@
 
  + `String:move_index` *index delta s* - move the code unit index along the string by delta code points
 
- + `String:strlen` *s* - count Unicode code points in the string
+ + `String:count_char` *s* - count Unicode code points in the string
 
  + `String:is_empty` *s* - test whether the string is empty
 
@@ -370,6 +366,10 @@
 
  + `Regex:match` *pat s0* - true if the pattern matches the entire string
 
+ + `Regex:look_at` *pat s0* - true if the pattern matches the start of string
+
+ + `Regex:look_match` *pat s0* - returns the initial matched part of the string, or nop
+
  + `Regex:split` *pat s0* - split a text according to a pattern
 
  + `Regex:matches` *pat s0* - return a list of pattern matches in a string
@@ -428,7 +428,7 @@
 
  + `System:drop` *n l* - drop the first n elements of a list
 
- + `System:fromto` *min max* - list of numbers for min to max (exclusive)
+ + `System:from_to` *min max* - list of numbers for min to max (exclusive)
 
  + `System:filter` *p l* - filter all members from a list which satisfy a predicate
 
@@ -436,7 +436,7 @@
 
  + `System:zip` *l0 l1* - zip to lists to a list of pairs
 
- + `System:zipwith` *f l0 l1* - apply a function pairwise to members of two lists
+ + `System:zip_with` *f l0 l1* - apply a function pairwise to members of two lists
 
  + `System:any` *p l* - checks whether any element of a list satisfies a predicate
 
@@ -444,13 +444,73 @@
 
  + `System:elem` *x l* - membership test
 
- + `System:notelem` *x l* - inverse membership test
+ + `System:not_elem` *x l* - inverse membership test
 
  + `System:union` *x l* - union of two lists (nˆ2 complexity)
 
- + `System:insertEverywhere` *x l* - insert a member in every position of a list
+ + `System:insert_everywhere` *x l* - insert a member in every position of a list
 
- + `System:concatMap` *f l* - concat map
+ + `System:concat_map` *f l* - concat map
 
  + `System:permutations` *l* - all permutations of a list
+
+## <egel/include/calculate.eg>
+
+ + `Calculate:return` *a* - calculate further with value a
+
+ + `Calculate:chain` *f g* - first do f, then g
+
+ + `Calculate:run` *f s* - run calculation f on state s
+
+ + `Calculate:<*` *f g* - first do f, then g
+
+ + `Calculate:apply` *f g* - first do f, then modify argument with g
+
+ + `Calculate:modify` *f g* - first do f, then modify state with g
+
+ + `Calculate:<@` *f g* - first do f, then apply g to argument
+
+ + `Calculate:<+` *f g* - first do f, then modify state with g
+
+## <egel/include/search.eg>
+
+ + `Search:success` *a* - succeed with value a
+
+ + `Search:message` *m* - fail or raise with message m
+
+ + `Search:nofail` *p* - this search may not fail
+
+ + `Search:parallel` *p q* - try alternatives p or q
+
+ + `Search:serial` *p q* - try alternative p then force q
+
+ + `Search:apply` *p f* - apply f to the argument being calculated
+
+ + `Search:` *opt p v* - optionally succeed p with value v
+
+ + `Search:` *serialopt p q* - optionally succeed p with value v
+
+ + `Search:<+>` *p q* - try alternatives p or q
+
+ + `Search:<+>` *p q* - try alternatives p then q
+
+ + `Search:</>` *p q* - try alternatives p optionally then q
+
+ + `Search:<*>` *p q* - try alternatives p then force q
+
+ + `Search:<@>` *p f* - apply f to the result of p
+
+ + `Search:<!>` *p m* - set the failure message to m
+
+ + `Search:one` *p* - one time p and return a singleton result
+
+ + `Search:plus` *p* - one or more p and return a list result
+
+ + `Search:star` *p* - zero or more p and return a list result
+
+ + `Search:star` *p s* - one or more p separated by s
+
+ + `Search:star` *p s* - zero or more p separated by s
+
+ + `Search:search` *p s* - search with p on state s 
 

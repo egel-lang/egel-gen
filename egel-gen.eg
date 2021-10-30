@@ -12,24 +12,26 @@ using List
 # constants with all source code locations
 
 val builtins = { 
-	"egel/src/builtin_system.cpp",
-	"egel/src/builtin_math.cpp",
-	"egel/src/builtin_eval.cpp",
-	"egel/src/builtin_string.cpp",
-	"egel/src/builtin_eval.cpp",
-	"egel/src/builtin_thread.cpp",
-	"egel/src/builtin_process.cpp"
+        "egel/src/builtin_system.cpp",
+        "egel/src/builtin_math.cpp",
+        "egel/src/builtin_eval.cpp",
+        "egel/src/builtin_string.cpp",
+        "egel/src/builtin_eval.cpp",
+        "egel/src/builtin_thread.cpp",
+        "egel/src/builtin_process.cpp"
 }
 
 val modules = {
-	"egel/lib/os/os.cpp",
-	"egel/lib/fs/fs.cpp",
-	"egel/lib/regex/regex.cpp",
-	"egel/lib/random/random.cpp"
+        "egel/lib/os/os.cpp",
+        "egel/lib/fs/fs.cpp",
+        "egel/lib/regex/regex.cpp",
+        "egel/lib/random/random.cpp"
 }
 
 val preludes = {
-	"egel/include/prelude.eg"
+        "egel/include/prelude.eg",
+        "egel/include/calculate.eg",
+        "egel/include/search.eg"
 }
 
 val sources = builtins ++ (modules ++ preludes)
@@ -40,9 +42,10 @@ data source
 
 def file_check =
     [ FN -> 
-	if OS:exists FN 
-	then nop # print (format "reading file {}\n" FN) 
-	else throw (format "didn't find file {}" FN) ]
+#        print (format "checking file: {}\n" FN);
+        if OS:exists FN 
+        then nop # print (format "reading file {}\n" FN) 
+        else throw (format "didn't find file {}" FN) ]
 
 def file_readlines =
     [ FS ->
@@ -84,14 +87,14 @@ def comb_to_md =
 
 def source_to_md =
     [ (source FN CC) ->
-	print (format "## <{}>\n\n" FN);
+        print (format "## <{}>\n\n" FN);
         map comb_to_md CC ]
 
 def sources_to_md =
     [ CC -> 
-	print "# Egel interpreter builtin combinators\n\n";
-	map source_to_md CC;
-	nop ]
+        print "# Egel interpreter builtin combinators\n\n";
+        map source_to_md CC;
+        nop ]
 
 # tying it all together
 
