@@ -486,15 +486,15 @@
 
  + `Search:apply` *p f* - apply f to the argument being calculated
 
- + `Search:` *opt p v* - optionally succeed p with value v
+ + `Search:opt` *p v* - optionally succeed p with value v
 
- + `Search:` *serialopt p q* - optionally succeed p with value v
+ + `Search:serialopt` *p q* - optionally succeed p with value v
 
  + `Search:<+>` *p q* - try alternatives p or q
 
  + `Search:<+>` *p q* - try alternatives p then q
 
- + `Search:</>` *p q* - try alternatives p optionally then q
+ + `Search:</>` *p q* - try alternatives p then q optionally
 
  + `Search:<*>` *p q* - try alternatives p then force q
 
