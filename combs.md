@@ -508,9 +508,9 @@
 
  + `Search:star` *p* - zero or more p and return a list result
 
- + `Search:star` *p s* - one or more p separated by s
+ + `Search:plus_sep` *p s* - one or more p separated by s
 
- + `Search:star` *p s* - zero or more p separated by s
+ + `Search:star_sep` *p s* - zero or more p separated by s
 
  + `Search:search` *p s* - search with p on state s 
 
