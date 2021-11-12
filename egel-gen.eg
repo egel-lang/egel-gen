@@ -43,37 +43,37 @@ data source
 def file_check =
     [ FN -> 
 #        print (format "checking file: {}\n" FN);
-        if OS:exists FN 
-        then nop # print (format "reading file {}\n" FN) 
+        if OS::exists FN 
+        then none # print (format "reading file {}\n" FN) 
         else throw (format "didn't find file {}" FN) ]
 
 def file_readlines =
     [ FS ->
-        let L = OS:read_line FS in
-        if OS:eof FS then nil else cons L (file_readlines FS) ]
+        let L = OS::read_line FS in
+        if OS::eof FS then nil else cons L (file_readlines FS) ]
 
 def file_input =
     [ FN ->
         file_check FN;
-        source FN (file_readlines (OS:open FN)) ]
+        source FN (file_readlines (OS::open FN)) ]
 
 # filter with a regex match against a documentation comment
 
-val regex_comment = Regex:compile "(?:(?: *)|(?:\\/\\/))##.*"
+val regex_comment = Regex::compile "(?:(?: *)|(?:\\/\\/))##.*"
 
 def filter_doc =
     [ (source FN LL) ->
-        source FN (filter (Regex:match regex_comment) LL) ]
+        source FN (filter (Regex::match regex_comment) LL) ]
 
 # extract combinator declarations
 
 data comb
 
-val regex_combinator = Regex:compile "(?:(?: *)|(?:\\/\\/))## +([^ ]*):([^ ]*) (.*) - (.*)"
+val regex_combinator = Regex::compile "(?:(?: *)|(?:\\/\\/))## +([^ ]*)::([^ ]*) (.*) - (.*)"
 
 def line_to_comb =
     [ L ->
-        let CC = Regex:group regex_combinator L in
+        let CC = Regex::group regex_combinator L in
         [ {A,B,C,D} -> comb A B C D | _ -> comb ] CC ]
 
 def source_to_comb =
@@ -82,8 +82,8 @@ def source_to_comb =
 # generate a short markdown document
 
 def comb_to_md =
-    [ (comb A B C D) -> print (format " + `{}:{}` *{}* - {}\n\n" A B C D)
-    | _ -> nop ]
+    [ (comb A B C D) -> print (format " + `{}::{}` *{}* - {}\n\n" A B C D)
+    | _ -> none ]
 
 def source_to_md =
     [ (source FN CC) ->
@@ -94,7 +94,7 @@ def sources_to_md =
     [ CC -> 
         print "# Egel interpreter builtin combinators\n\n";
         map source_to_md CC;
-        nop ]
+        none ]
 
 # tying it all together
 
