@@ -31,7 +31,8 @@ val modules = {
 val preludes = {
         "egel/include/prelude.eg",
         "egel/include/calculate.eg",
-        "egel/include/search.eg"
+        "egel/include/search.eg",
+        "egel/include/map.eg"
 }
 
 val sources = builtins ++ (modules ++ preludes)

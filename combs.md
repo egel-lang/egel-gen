@@ -398,61 +398,69 @@
 
  + `System::uncurry` *f (x, y)* - uncurry arguments
 
+ + `System::iter` *n f x* - iterate a function
+
  + `System::fst` *(x, y)* - proj0 on pair
 
  + `System::snd` *(x, y)* - proj1 on pair
 
- + `System::length` *l* - length of a list
+ + `List::length` *l* - length of a list
 
- + `System::foldl` *f z l* - left fold on a list
+ + `List::foldl` *f z l* - left fold on a list
 
- + `System::foldr` *f z l* - right fold on a list
+ + `List::foldr` *f z l* - right fold on a list
 
- + `System::head` *l* - head of a list
+ + `List::head` *l* - head of a list
 
- + `System::tail` *l* - tail of a list
+ + `List::tail` *l* - tail of a list
 
- + `System::++` *l0 l1* - concatenation of two lists
+ + `List::++` *l0 l1* - concatenation of two lists
 
- + `System::map` *f l* - map a function over a list
+ + `List::map` *f l* - map a function over a list
 
- + `System::reverse` *l* - reverse a list
+ + `List::reverse` *l* - reverse a list
 
- + `System::block` *n* - list of number from 0 to n exclusive
+ + `List::block` *n* - list of number from 0 to n exclusive
 
- + `System::nth` *n l* - nth element of a list
+ + `List::nth` *n l* - nth element of a list
 
- + `System::insert` *n x l* - insert an element at given position
+ + `List::insert` *n x l* - insert an element at given position
 
- + `System::take` *n l* - take the first n elements of a list
+ + `List::take` *n l* - take the first n elements of a list
 
- + `System::drop` *n l* - drop the first n elements of a list
+ + `List::drop` *n l* - drop the first n elements of a list
 
- + `System::from_to` *min max* - list of numbers for min to max (exclusive)
+ + `List::from_to` *min max* - list of numbers for min to max (exclusive)
 
- + `System::filter` *p l* - filter all members from a list which satisfy a predicate
+ + `List::filter` *p l* - filter all members from a list which satisfy a predicate
 
- + `System::flatten` *ll* - flatten a list of lists to a list
+ + `List::split` *p l* - split a list into members and non-members of a predicate
 
- + `System::zip` *l0 l1* - zip to lists to a list of pairs
+ + `List::flatten` *ll* - flatten a list of lists to a list
 
- + `System::zip_with` *f l0 l1* - apply a function pairwise to members of two lists
+ + `List::zip` *l0 l1* - zip to lists to a list of pairs
 
- + `System::any` *p l* - checks whether any element of a list satisfies a predicate
+ + `List::zip_with` *f l0 l1* - apply a function pairwise to members of two lists
 
- + `System::all` *p l* - checks whether all elements of a list  satisfies a predicate
+ + `List::transpose` *ll* - transpose a list of lists
 
- + `System::elem` *x l* - membership test
+ + `List::any` *p l* - checks whether any element of a list satisfies a predicate
 
- + `System::not_elem` *x l* - inverse membership test
+ + `List::all` *p l* - checks whether all elements of a list  satisfies a predicate
 
- + `System::union` *x l* - union of two lists (nˆ2 complexity)
+ + `List::elem` *x l* - membership test
 
- + `System::insert_everywhere` *x l* - insert a member in every position of a list
+ + `List::not_elem` *x l* - inverse membership test
 
- + `System::concat_map` *f l* - concat map
+ + `List::union` *x l* - union of two lists (nˆ2 complexity)
 
- + `System::permutations` *l* - all permutations of a list
+ + `List::insert_everywhere` *x l* - insert a member in every position of a list
+
+ + `List::concat_map` *f l* - concat map
+
+ + `List::permutations` *l* - all permutations of a list
+
+ + `List::sort` *l* - merge sort 
 
 ## <egel/include/calculate.eg>
 
@@ -513,4 +521,78 @@
  + `Search::star_sep` *p s* - zero or more p separated by s
 
  + `Search::search` *p s* - search with p on state s 
+
+## <egel/include/map.eg>
+
+ + `Map::empty_test` *m* - test for emptyness
+
+ + `Map::choose` *m* - look at one key from the map
+
+ + `Map::maximum` *m* - take the maximum key/value from the map
+
+ + `Map::minimum` *m* - take the minimim key/value from the map
+
+ + `Map::size` *m* - size of the map
+
+ + `Map::look` *m k* - retrieve optional value from map with key
+
+ + `Map::has` *m k* - check for key in map
+
+ + `Map::member` *m k v* - check whether key/value is a member of map
+
+ + `Map::nth` *m k* - take value from map with key
+
+ + `Map::nth_total` *c m k* - take value from map with key or return constant
+
+ + `Map::new_node` *k v l r* - create a new node
+
+ + `Map::glue` *m0 m1* - glue two maps together
+
+ + `Map::change` *f m* - change a map with a key and an update function (option value to option value)
+
+ + `Map::insert` *k v m* - insert key/value into map
+
+ + `Map::delete` *k m* - delete key from map
+
+ + `Map::remove` *k v m* - remove key/value from map
+
+ + `Map::foldr` *f c m* - foldr with key/value and accumulator function
+
+ + `Map::foldl` *f c m* - foldl with key/value and accumulator function
+
+ + `Map::foldm` *f c m* - foldm with key/value and accumulator function
+
+ + `Map::apply` *f m* - map f to values in map
+
+ + `Map::to_up_list` *m* - map to increasing list of key/value tuples
+
+ + `Map::to_down_list` *f m* - map to decreasing list of key/value tuples
+
+ + `Map::to_list` *m* - map to list
+
+ + `Map::from_list` *l* - list to map
+
+ + `Map::position` *m k* - position of key in map
+
+ + `Map::domain` *m* - the keys in the map
+
+ + `Map::range` *m* - the values in the map
+
+ + `Map::any` *p m* - has a key/value in map satisfying predicate
+
+ + `Map::all` *p m* - all key/value in map satisfy predicate
+
+ + `Map::filter` *p m* - filter all key/value in map satisfy predicate
+
+ + `Map::union` *m0 m1* - union of two maps
+
+ + `Map::intersection` *m0 m1* - intersection of two maps
+
+ + `Map::inverse` *m* - construct inverse of a map
+
+ + `Map::compose` *m0 m1* - compose two maps
+
+ + `Map::decompose` *m* - decompose a map into two maps with integers 
+
+ + `Map::partition` *f m* - partition with a function which maps key/value to part
 
