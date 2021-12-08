@@ -228,13 +228,17 @@
 
 ## <egel/lib/os/os.cpp>
 
- + `OS::open` *fn* - create a channel from filename 
+ + `OS::open_in` *fn* - create a channel from filename 
+
+ + `OS::open_out` *fn* - create a channel from filename 
 
  + `OS::close` *c* - close a channel
 
  + `OS::read` *c* - read a string from a channel
 
  + `OS::read_line` *c* - read a line from a channel
+
+ + `OS::read_all` *c* - read entire channel content
 
  + `OS::write` *c s* - write a string s to a channel
 
@@ -243,6 +247,8 @@
  + `OS::flush` *c* - flush a channel
 
  + `OS::eof` *c* - tests if there is no more input
+
+ + `OS::flock` *f n* - create a filesystem lock file (not process safe)
 
  + `OS::exit` *n* - flush all channels and terminate process with exit code n
 
@@ -253,6 +259,10 @@
  + `OS::client` *host port* - create a client channel
 
 ## <egel/lib/fs/fs.cpp>
+
+ + `OS::concat` *p0 p1* - concatenates two paths
+
+ + `OS::concat_with` *p0 p1* - concatenates two paths with a directory separator
 
  + `OS::empty` *p* - checks whether the path is empty
 
@@ -524,7 +534,7 @@
 
 ## <egel/include/map.eg>
 
- + `Map::empty_test` *m* - test for emptyness
+ + `Map::is_empty` *m* - test for emptyness
 
  + `Map::choose` *m* - look at one key from the map
 
@@ -556,11 +566,17 @@
 
  + `Map::remove` *k v m* - remove key/value from map
 
- + `Map::foldr` *f c m* - foldr with key/value and accumulator function
+ + `Map::foldr_key` *f c m* - foldr with value and key/value accumulator function
 
- + `Map::foldl` *f c m* - foldl with key/value and accumulator function
+ + `Map::foldl_key` *f c m* - foldl with value and key/value accumulator function
 
- + `Map::foldm` *f c m* - foldm with key/value and accumulator function
+ + `Map::foldm_key` *f c m* - foldm with value and key/value accumulator function
+
+ + `Map::foldr` *f c m* - foldr with value and accumulator function
+
+ + `Map::foldl` *f c m* - foldl with value and accumulator function
+
+ + `Map::foldm` *f c m* - foldm with value and accumulator function
 
  + `Map::apply` *f m* - map f to values in map
 
@@ -595,4 +611,44 @@
  + `Map::decompose` *m* - decompose a map into two maps with integers 
 
  + `Map::partition` *f m* - partition with a function which maps key/value to part
+
+## <egel/include/tinydb.eg>
+
+ + `Tiny::db_tiny` *h p* - tiny database object from a home and path
+
+ + `Tiny::db_home` *db* - retrieve the home location
+
+ + `Tiny::db_path` *db* - retrieve the database name
+
+ + `Tiny::db_location` *db* - path to database
+
+ + `Tiny::db_location` *db table* - path to a table
+
+ + `Tiny::db_exists` *db* - does this database exist
+
+ + `Tiny::db_create` *db* - create the database
+
+ + `Tiny::db_list_tables` *db* - list all tables in database
+
+ + `Tiny::db_create_table` *db table* - create a table in the database
+
+ + `Tiny::db_drop_table` *db table* - drop a table from the database
+
+ + `Tiny::db_list_records` *db table* - list all records from a table 
+
+ + `Tiny::db_read_table` *db table* - read all table returning key/value pairs
+
+ + `Tiny::db_record_location` *db table key* - record location on the filesystem
+
+ + `Tiny::db_create_record` *db table key value* - store a new key/value 
+
+ + `Tiny::db_update_record` *db table key value* - update a key/value 
+
+ + `Tiny::db_write_record` *db table key value* - unconditionally create record
+
+ + `Tiny::db_write_record` *db table key* - retrieve a record value
+
+ + `Tiny::db_remove_record` *db table key* - remove a record by key
+
+ + `Tiny::db_transaction` *db f* - a transaction is a program holding on to a lock
 

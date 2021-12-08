@@ -32,7 +32,8 @@ val preludes = {
         "egel/include/prelude.eg",
         "egel/include/calculate.eg",
         "egel/include/search.eg",
-        "egel/include/map.eg"
+        "egel/include/map.eg",
+        "egel/include/tinydb.eg"
 }
 
 val sources = builtins ++ (modules ++ preludes)
@@ -56,7 +57,7 @@ def file_readlines =
 def file_input =
     [ FN ->
         file_check FN;
-        source FN (file_readlines (OS::open FN)) ]
+        source FN (file_readlines (OS::open_in FN)) ]
 
 # filter with a regex match against a documentation comment
 
