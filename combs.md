@@ -394,6 +394,16 @@
 
  + `Math::between` *min max* - return a random number between min and max
 
+## <egel/lib/dict/dict.cpp>
+
+ + `System::dict_has` *d k* - check for key
+
+ + `System::dict_get` *d k* - get a value by key
+
+ + `System::dict_set` *d k v* - set a value by key
+
+ + `System::dict_keys` *d* - dictionary keys as list
+
 ## <egel/include/prelude.eg>
 
  + `System::or` *p q* - boolean or
@@ -426,6 +436,8 @@
 
  + `List::++` *l0 l1* - concatenation of two lists
 
+ + `List::postpend` *l e* - postpend an element
+
  + `List::map` *f l* - map a function over a list
 
  + `List::reverse` *l* - reverse a list
@@ -439,6 +451,8 @@
  + `List::take` *n l* - take the first n elements of a list
 
  + `List::drop` *n l* - drop the first n elements of a list
+
+ + `List::chunks` *n l* - list to list of chunks of given size
 
  + `List::from_to` *min max* - list of numbers for min to max (exclusive)
 
@@ -611,6 +625,64 @@
  + `Map::decompose` *m* - decompose a map into two maps with integers 
 
  + `Map::partition` *f m* - partition with a function which maps key/value to part
+
+## <egel/include/generator.eg>
+
+ + `Gen::to_list` *g* - generator to list
+
+ + `Gen::from_list` *l* - list to generator
+
+ + `Gen::length` *l* - length of a list
+
+ + `Gen::foldl` *f z l* - left fold on a list
+
+ + `Gen::foldr` *f z l* - right fold on a list
+
+ + `Gen::head` *l* - head of a list
+
+ + `Gen::tail` *l* - tail of a list
+
+ + `Gen::++` *l0 l1* - concatenation of two lists
+
+ + `Gen::map` *f l* - map a function over a list
+
+ + `Gen::reverse` *l* - reverse a list
+
+ + `Gen::block` *n* - list of number from 0 to n exclusive
+
+ + `Gen::nth` *n l* - nth element of a list
+
+ + `Gen::insert` *n x l* - insert an element at given position
+
+ + `Gen::take` *n l* - take the first n elements of a list
+
+ + `Gen::drop` *n l* - drop the first n elements of a list
+
+ + `Gen::repeat` *n* - infinite list of n
+
+ + `Gen::from` *min* - list of numbers from min 
+
+ + `Gen::from_to` *min max* - list of numbers for min to max (exclusive)
+
+ + `Gen::filter` *p l* - filter all members from a list which satisfy a predicate
+
+ + `Gen::flatten` *ll* - flatten a list of lists to a list
+
+ + `Gen::zip` *l0 l1* - zip to lists to a list of pairs
+
+ + `Gen::zip_with` *f l0 l1* - apply a function pairwise to members of two lists
+
+ + `Gen::any` *p l* - checks whether any element of a list satisfies a predicate
+
+ + `Gen::all` *p l* - checks whether all elements of a list  satisfies a predicate
+
+ + `Gen::elem` *x l* - membership test
+
+ + `Gen::not_elem` *x l* - inverse membership test
+
+ + `Gen::from_lists` *l* - convert a list of lists to generator of generators
+
+ + `Gen::to_lists` *c* - convert generator of generators to list of lists
 
 ## <egel/include/tinydb.eg>
 

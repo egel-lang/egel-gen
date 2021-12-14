@@ -25,7 +25,8 @@ val modules = {
         "egel/lib/os/os.cpp",
         "egel/lib/fs/fs.cpp",
         "egel/lib/regex/regex.cpp",
-        "egel/lib/random/random.cpp"
+        "egel/lib/random/random.cpp",
+        "egel/lib/dict/dict.cpp"
 }
 
 val preludes = {
@@ -33,6 +34,7 @@ val preludes = {
         "egel/include/calculate.eg",
         "egel/include/search.eg",
         "egel/include/map.eg",
+        "egel/include/generator.eg",
         "egel/include/tinydb.eg"
 }
 
