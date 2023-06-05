@@ -212,6 +212,34 @@
 
  + `System::eval` *text* - evaluatate the expression in `text`
 
+## <egel/src/builtin_runtime.hpp>
+
+ + `System::dis` *o* - disassemble a combinator object
+
+ + `System::asm` *s* - assemble bytecode into a combinator
+
+ + `System::serialize` *t* - serialize a term to a text
+
+ + `System::deserialize` *t* - serialize a text to a term
+
+ + `System::is_module` *m* - check we have a module
+
+ + `System::query_module_name` *m* - get the name of the module
+
+ + `System::query_module_path` *m* - get the path of the module
+
+ + `System::query_module_imports` *m* - get the path of the module
+
+ + `System::query_module_exports` *m* - get the path of the module
+
+ + `System::query_module_values` *m* - get the path of the module
+
+ + `System::get_tag` *s* - get the type of symbol s
+
+ + `System::set_data` *s* - define symbol s as data
+
+ + `System::set_def` *s e* - define symbol s as expression e
+
 ## <egel/src/builtin_thread.hpp>
 
  + `System::par` *f g* - concurrently evaluate 'f none' and 'g none'
