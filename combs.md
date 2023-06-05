@@ -1,6 +1,6 @@
 # Egel interpreter builtin combinators
 
-## <egel/src/builtin_system.cpp>
+## <egel/src/builtin_system.hpp>
 
  + `System::k` *x y* - k combinator
 
@@ -60,15 +60,15 @@
 
  + `System::pack` *s* - create a string from a list of code points
 
- + `System::arg` *n* - return the n-th application argument, otherwise return 'none'
+ + `System::arg` *n* - return the n-th application argument, otherwise return
 
- + `System::get_env` *s* - return the value of environment variable s, otherwise return 'none'
+ + `System::get_env` *s* - return the value of environment variable s, otherwise
 
- + `System::print` *o0 .. on* - print terms, don't escape characters or texts 
+ + `System::print` *o0 .. on* - print terms, don't escape characters or texts
 
- + `System::format` *fmt x ... * - create a string from formatted string fmt and objects x,..
+ + `System::format` *fmt x ... * - create a string from formatted string fmt and
 
-## <egel/src/builtin_math.cpp>
+## <egel/src/builtin_math.hpp>
 
  + `Math::is_finite` *x* - test whether this float is finite
 
@@ -96,13 +96,13 @@
 
  + `Math::cbrt` *x* - returns the cube root of a number
 
- + `Math::ceil` *x* - returns the smallest integer greater than or equal to a number
+ + `Math::ceil` *x* - returns the smallest integer greater than or equal to a
 
  + `Math::cos` *x* - returns the cosine of a number
 
  + `Math::cosh` *x* - returns the hyperbolic cosine of a number
 
- + `Math::exp` *x* - Returns Ex, where x is the argument, and E is Euler's constant (2.718…), the base of the natural logarithm
+ + `Math::exp` *x* - Returns Ex, where x is the argument, and E is Euler's
 
  + `Math::expm1` *x* - returns subtracting 1 from exp x
 
@@ -110,7 +110,7 @@
 
  + `Math::log` *x* - returns the natural logarithm (loge, also ln) of a number
 
- + `Math::log1p` *x* - returns the natural logarithm (loge, also ln) of 1 + x for a number x
+ + `Math::log1p` *x* - returns the natural logarithm (loge, also ln) of 1 + x for
 
  + `Math::log10` *x* - returns the base 10 logarithm of a number
 
@@ -122,9 +122,9 @@
 
  + `Math::pow` *x y* - returns base to the exponent power, that is, baseexponent
 
- + `Math::round` *x* - returns the value of a number rounded to the nearest integer
+ + `Math::round` *x* - returns the value of a number rounded to the nearest
 
- + `Math::sign` *x* - returns the sign of the x, indicating whether x is positive, negative or zero
+ + `Math::sign` *x* - returns the sign of the x, indicating whether x is
 
  + `Math::sin` *x* - returns the sine of a number
 
@@ -136,13 +136,13 @@
 
  + `Math::tanh` *x* - returns the hyperbolic tangent of a number
 
- + `Math::trunc` *x* - returns the integral part of the number x, removing any fractional digits
+ + `Math::trunc` *x* - returns the integral part of the number x, removing any
 
-## <egel/src/builtin_eval.cpp>
+## <egel/src/builtin_eval.hpp>
 
  + `System::eval` *text* - evaluatate the expression in `text`
 
-## <egel/src/builtin_string.cpp>
+## <egel/src/builtin_string.hpp>
 
  + `String::eq` *s0 s1* - string equality operator
 
@@ -156,23 +156,23 @@
 
  + `String::le` *s0 s1* - stringLess than or equal operator
 
- + `String::compare` *s0 s1* - compare the characters bitwise in this icu::UnicodeString to the characters in text
+ + `String::compare` *s0 s1* - compare the characters bitwise in this
 
- + `String::compare_order` *s0 s1* - compare two Unicode strings in code point order
+ + `String::compare_order` *s0 s1* - compare two Unicode strings in code point
 
- + `String::case_compare` *s0 s1* - compare two strings case-insensitively using full case folding
+ + `String::case_compare` *s0 s1* - compare two strings case-insensitively using
 
- + `String::starts_with` *s0 s1* - determine if this starts with the characters in text 
+ + `String::starts_with` *s0 s1* - determine if this starts with the characters
 
- + `String::ends_with` *s0 s1* - determine if this ends with the characters in text 
+ + `String::ends_with` *s0 s1* - determine if this ends with the characters in
 
- + `String::index_of` *s0 s1* - locate in this the first occurrence of the characters in text, using bitwise comparison
+ + `String::index_of` *s0 s1* - locate in this the first occurrence of the
 
- + `String::last_index_of` *s0 s1* - locate in this the last occurrence of the characters in text, using bitwise comparison
+ + `String::last_index_of` *s0 s1* - locate in this the last occurrence of the
 
- + `String::char_at` *n s* - return the code point that contains the code unit at offset offset
+ + `String::char_at` *n s* - return the code point that contains the code unit at
 
- + `String::move_index` *index delta s* - move the code unit index along the string by delta code points
+ + `String::move_index` *index delta s* - move the code unit index along the
 
  + `String::count_char` *s* - count Unicode code points in the string
 
@@ -184,39 +184,39 @@
 
  + `String::append` *s0 s1* - append the two strings
 
- + `String::insert` *s0 n s1* - insert the characters in s0 into the s1 at offset n
+ + `String::insert` *s0 n s1* - insert the characters in s0 into the s1 at offset
 
- + `String::replace` *s0 s1 s2* - replace all occurrences of characters s0 with the characters s2 in s0
+ + `String::replace` *s0 s1 s2* - replace all occurrences of characters s0 with
 
- + `String::remove` *n0 n1 s* - remove the characters in the range [n0, n1) from s
+ + `String::remove` *n0 n1 s* - remove the characters in the range [n0, n1) from
 
- + `String::retain` *n0 n1 s* - retain the characters in the range [n0, n1) from s
+ + `String::retain` *n0 n1 s* - retain the characters in the range [n0, n1) from
 
- + `String::trim` *s* - trims leading and trailing whitespace from this s 
+ + `String::trim` *s* - trims leading and trailing whitespace from this s
 
  + `String::reverse` *s* - reverse s
 
- + `String::to_upper` *s* - convert the characters in this to upper case following the conventions of the default locale
+ + `String::to_upper` *s* - convert the characters in this to upper case
 
- + `String::to_lower` *s* - convert the characters in this to lower case following the conventions of the default locale
+ + `String::to_lower` *s* - convert the characters in this to lower case
 
  + `String::fold_case` *s* - case-folds the characters in this string
 
- + `String::unescape` *s* - unescape a string of characters and return a string containing the result
+ + `String::unescape` *s* - unescape a string of characters and return a string
 
  + `String::ord` *c* - integer value of unicode point/character
 
  + `String::chr` *n* - unicode point of integer value
 
-## <egel/src/builtin_eval.cpp>
+## <egel/src/builtin_eval.hpp>
 
  + `System::eval` *text* - evaluatate the expression in `text`
 
-## <egel/src/builtin_thread.cpp>
+## <egel/src/builtin_thread.hpp>
 
  + `System::par` *f g* - concurrently evaluate 'f none' and 'g none'
 
-## <egel/src/builtin_process.cpp>
+## <egel/src/builtin_process.hpp>
 
  + `System::proc` *f* - create a process object from f
 
@@ -228,19 +228,23 @@
 
 ## <egel/lib/os/os.cpp>
 
- + `OS::open_in` *fn* - create a channel from filename 
+ + `OS::open_in` *fn* - create a channel from filename
 
- + `OS::open_out` *fn* - create a channel from filename 
+ + `OS::open_out` *fn* - create a channel from filename
 
  + `OS::close` *c* - close a channel
 
  + `OS::read` *c* - read a string from a channel
 
+ + `OS::read_byte` *c* - read a byte from a channel
+
  + `OS::read_line` *c* - read a line from a channel
 
  + `OS::read_all` *c* - read entire channel content
 
- + `OS::write` *c s* - write a string s to a channel
+ + `OS::write` *c s* - write a string to a channel
+
+ + `OS::write_byte` *c b* - write a byte to a channel
 
  + `OS::write_line` *c s* - write a string s to a channel
 
@@ -254,7 +258,7 @@
 
  + `OS::accept` *serverobject* - accept connections
 
- + `OS::server` *port in* - create a serverobject 
+ + `OS::server` *port in* - create a serverobject
 
  + `OS::client` *host port* - create a client channel
 
@@ -324,11 +328,11 @@
 
  + `OS::exists` *p* - checks whether path refers to existing file system object
 
- + `OS::equivalent` *p0 p1* - checks whether two paths refer to the same file system object
+ + `OS::equivalent` *p0 p1* - checks whether two paths refer to the same file
 
  + `OS::file_size` *p* - returns the size of a file
 
- + `OS::hard_link_count` *p* - returns the number of hard links referring to the specific file
+ + `OS::hard_link_count` *p* - returns the number of hard links referring to the
 
  + `OS::permissions` *p* - get file access permissions
 
@@ -338,11 +342,11 @@
 
  + `OS::remove` *p* - removes a file or empty directory
 
- + `OS::remove_all` *p* - removes a file or directory and all its contents, recursively
+ + `OS::remove_all` *p* - removes a file or directory and all its contents,
 
  + `OS::rename` *p0 p1* - moves or renames a file or directory
 
- + `OS::resize_file` *p n* - changes the size of a regular file by truncation or zero-fill
+ + `OS::resize_file` *p n* - changes the size of a regular file by truncation or
 
  + `OS::space_free` *p* - determines free space on the file system
 
@@ -352,17 +356,17 @@
 
  + `OS::is_block_file` *p* - checks whether the given path refers to block device
 
- + `OS::is_character_file` *p* - checks whether the given path refers to a character device
+ + `OS::is_character_file` *p* - checks whether the given path refers to a
 
  + `OS::is_directory` *p* - checks whether the given path refers to a directory
 
- + `OS::is_empty` *p* - checks whether the given path refers to an empty file or directory
+ + `OS::is_empty` *p* - checks whether the given path refers to an empty file or
 
  + `OS::is_fifo` *p* - checks whether the given path refers to a named pipe
 
  + `OS::is_other` *p* - checks whether the argument refers to an other file
 
- + `OS::is_regular_file` *p* - checks whether the argument refers to a regular file
+ + `OS::is_regular_file` *p* - checks whether the argument refers to a regular
 
  + `OS::is_socket` *p* - checks whether the argument refers to a named IPC socket
 
@@ -378,15 +382,15 @@
 
  + `Regex::look_at` *pat s0* - true if the pattern matches the start of string
 
- + `Regex::look_match` *pat s0* - returns the initial matched part of the string, or none
+ + `Regex::look_match` *pat s0* - returns the initial matched part of the string,
 
  + `Regex::split` *pat s0* - split a text according to a pattern
 
  + `Regex::matches` *pat s0* - return a list of pattern matches in a string
 
- + `Regex::replace` *pat s0 s1* - replace the first occurence of pattern in a string with a string
+ + `Regex::replace` *pat s0 s1* - replace the first occurence of pattern in a
 
- + `Regex::replace_all` *pat s0 s1* - replace the all occurences of pattern in a string with a string
+ + `Regex::replace_all` *pat s0 s1* - replace the all occurences of pattern in a
 
  + `Regex::group` *pat s0* - return the matched groups in a string
 
@@ -396,13 +400,15 @@
 
 ## <egel/lib/dict/dict.cpp>
 
- + `System::dict_has` *d k* - check for key
+ + `Dict::has` *d k* - check for key
 
- + `System::dict_get` *d k* - get a value by key
+ + `Dict::get` *d k* - get a value by key
 
- + `System::dict_set` *d k v* - set a value by key
+ + `Dict::set` *d k v* - set a value by key
 
- + `System::dict_keys` *d* - dictionary keys as list
+ + `Dict::erase` *d k* - erase a value by key
+
+ + `Dict::keys` *d* - dictionary keys as list
 
 ## <egel/include/prelude.eg>
 
@@ -412,17 +418,41 @@
 
  + `System::not` *p q* - boolean not
 
+ + `System::||` *p q* - 'lazy' or
+
+ + `System::&&` *p q* - 'lazy' and
+
+ + `System::fix` *f* - fixed point of f
+
  + `System::.` *f g* - function composition
 
+ + `System::|>` *x f* - reverse application
+
  + `System::flip` *f x y* - flip two arguments
+
+ + `System::join` *f x* - f x x
 
  + `System::uncurry` *f (x, y)* - uncurry arguments
 
  + `System::iter` *n f x* - iterate a function
 
+ + `System::trace` *n f x* - trace iteration of a function
+
+ + `System::while` *f x* - apply f as long as it reduces
+
  + `System::fst` *(x, y)* - proj0 on pair
 
- + `System::snd` *(x, y)* - proj1 on pair
+ + `System::fst` *(x, y)* - proj1 on tuple
+
+ + `System::snd` *(x, y)* - proj2 on tuple
+
+ + `System::abs` *x* - absolute
+
+ + `System::min` *x y* - minimum
+
+ + `System::max` *x y* - maximum
+
+ + `System::**` *x y* - power (temporary)
 
  + `List::length` *l* - length of a list
 
@@ -430,9 +460,15 @@
 
  + `List::foldr` *f z l* - right fold on a list
 
+ + `List::scanl` *f z l* - left scan on a list
+
  + `List::head` *l* - head of a list
 
  + `List::tail` *l* - tail of a list
+
+ + `List::last` *l* - last of a list
+
+ + `List::init` *l* - init of a list
 
  + `List::++` *l0 l1* - concatenation of two lists
 
@@ -444,7 +480,11 @@
 
  + `List::block` *n* - list of number from 0 to n exclusive
 
+ + `List::repeat` *n x* - list of n x elements
+
  + `List::nth` *n l* - nth element of a list
+
+ + `List::index_of` *x xx* - index of x in xx
 
  + `List::insert` *n x l* - insert an element at given position
 
@@ -452,13 +492,19 @@
 
  + `List::drop` *n l* - drop the first n elements of a list
 
+ + `List::split_at` *n l* - take and drop the first n elements of a list
+
  + `List::chunks` *n l* - list to list of chunks of given size
 
- + `List::from_to` *min max* - list of numbers for min to max (exclusive)
+ + `List::from_to` *f t* - list of numbers for l to t (inclusive)
 
  + `List::filter` *p l* - filter all members from a list which satisfy a predicate
 
  + `List::split` *p l* - split a list into members and non-members of a predicate
+
+ + `List::break` *p l* - split a list in two parts
+
+ + `List::split_on` *x ll* - split a list on a member
 
  + `List::flatten` *ll* - flatten a list of lists to a list
 
@@ -478,6 +524,8 @@
 
  + `List::union` *x l* - union of two lists (nˆ2 complexity)
 
+ + `List::intersection` *x l* - intersection of two lists (nˆ2 complexity)
+
  + `List::insert_everywhere` *x l* - insert a member in every position of a list
 
  + `List::concat_map` *f l* - concat map
@@ -485,6 +533,18 @@
  + `List::permutations` *l* - all permutations of a list
 
  + `List::sort` *l* - merge sort 
+
+ + `List::sort_by` *f l* - merge sort with an order operator
+
+ + `List::nub` *l* - remove consecutive duplicates
+
+ + `List::unique` *l* - make all members unique
+
+ + `List::range` *l f* - iterate over elements (reverse map
+
+ + `List::range2` *l0 l1 f* - iterate over elements of two lists
+
+ + `List::range3` *l0 l1 l2 f* - iterate over elements of three lists
 
 ## <egel/include/calculate.eg>
 
@@ -660,6 +720,8 @@
 
  + `Gen::repeat` *n* - infinite list of n
 
+ + `Gen::cycle` *l* - infinite list of cycling list l
+
  + `Gen::from` *min* - list of numbers from min 
 
  + `Gen::from_to` *min max* - list of numbers for min to max (exclusive)
@@ -683,6 +745,12 @@
  + `Gen::from_lists` *l* - convert a list of lists to generator of generators
 
  + `Gen::to_lists` *c* - convert generator of generators to list of lists
+
+ + `Gen::range` *l f* - iterate over elements (reverse map
+
+ + `Gen::range` *l0 l1 f* - iterate over elements of two lists
+
+ + `Gen::range` *l0 l1 l2 f* - iterate over elements of three lists
 
 ## <egel/include/tinydb.eg>
 

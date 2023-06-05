@@ -12,13 +12,13 @@ using List
 # constants with all source code locations
 
 val builtins = { 
-        "egel/src/builtin_system.cpp",
-        "egel/src/builtin_math.cpp",
-        "egel/src/builtin_eval.cpp",
-        "egel/src/builtin_string.cpp",
-        "egel/src/builtin_eval.cpp",
-        "egel/src/builtin_thread.cpp",
-        "egel/src/builtin_process.cpp"
+        "egel/src/builtin_system.hpp",
+        "egel/src/builtin_math.hpp",
+        "egel/src/builtin_eval.hpp",
+        "egel/src/builtin_string.hpp",
+        "egel/src/builtin_eval.hpp",
+        "egel/src/builtin_thread.hpp",
+        "egel/src/builtin_process.hpp"
 }
 
 val modules = {
