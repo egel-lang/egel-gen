@@ -14,20 +14,20 @@ using List
 val builtins = { 
         "egel/src/builtin_system.hpp",
         "egel/src/builtin_math.hpp",
-        "egel/src/builtin_eval.hpp",
         "egel/src/builtin_string.hpp",
         "egel/src/builtin_eval.hpp",
         "egel/src/builtin_runtime.hpp",
         "egel/src/builtin_thread.hpp",
-        "egel/src/builtin_process.hpp"
+        "egel/src/builtin_dict.hpp",
+        "egel/src/builtin_ffi.hpp"
+#        "egel/src/builtin_process.hpp"
 }
 
 val modules = {
         "egel/lib/os/os.cpp",
         "egel/lib/fs/fs.cpp",
         "egel/lib/regex/regex.cpp",
-        "egel/lib/random/random.cpp",
-        "egel/lib/dict/dict.cpp"
+        "egel/lib/random/random.cpp"
 }
 
 val preludes = {
@@ -35,8 +35,8 @@ val preludes = {
         "egel/include/calculate.eg",
         "egel/include/search.eg",
         "egel/include/map.eg",
-        "egel/include/generator.eg",
-        "egel/include/tinydb.eg"
+        "egel/include/generator.eg"
+#        "egel/include/tinydb.eg"
 }
 
 val sources = builtins ++ (modules ++ preludes)
@@ -64,7 +64,7 @@ def file_input =
 
 # filter with a regex match against a documentation comment
 
-val regex_comment = Regex::compile "(?:(?: *)|(?:\\/\\/))##.*"
+val regex_comment = Regex::compile "(?:(?: *)|(?:\\/\\/) *)##.*"
 
 def filter_doc =
     [ (source FN LL) ->
@@ -74,7 +74,7 @@ def filter_doc =
 
 data comb
 
-val regex_combinator = Regex::compile "(?:(?: *)|(?:\\/\\/))## +([^ ]*)::([^ ]*) (.*) - (.*)"
+val regex_combinator = Regex::compile "(?:(?: *)|(?:\\/\\/) *)## +([^ ]*)::([^ ]*) (.*) - (.*)"
 
 def line_to_comb =
     [ L ->

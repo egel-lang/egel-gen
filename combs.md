@@ -68,6 +68,8 @@
 
  + `System::format` *fmt x ... * - create a string from formatted string fmt and
 
+ + `System::fast_foldl` *f z xx* - fast_foldl
+
 ## <egel/src/builtin_math.hpp>
 
  + `Math::is_finite` *x* - test whether this float is finite
@@ -138,10 +140,6 @@
 
  + `Math::trunc` *x* - returns the integral part of the number x, removing any
 
-## <egel/src/builtin_eval.hpp>
-
- + `System::eval` *text* - evaluatate the expression in `text`
-
 ## <egel/src/builtin_string.hpp>
 
  + `String::eq` *s0 s1* - string equality operator
@@ -162,7 +160,9 @@
 
  + `String::case_compare` *s0 s1* - compare two strings case-insensitively using
 
- + `String::starts_with` *s0 s1* - determine if this starts with the characters
+ + `String::extract` *n0 n1 s* - extract [n0, n0+n1) chars from s
+
+ + `String::starts_with` *s0 s1* - determine if this starts with the characters in text
 
  + `String::ends_with` *s0 s1* - determine if this ends with the characters in
 
@@ -244,15 +244,39 @@
 
  + `System::par` *f g* - concurrently evaluate 'f none' and 'g none'
 
-## <egel/src/builtin_process.hpp>
+## <egel/src/builtin_dict.hpp>
 
- + `System::proc` *f* - create a process object from f
+ + `Dict::has` *d k* - check for key
 
- + `System::send` *proc msg* - send message msg to proc
+ + `Dict::get` *d k* - get a value by key
 
- + `System::recv` *proc* - receive a message from process proc
+ + `Dict::set` *d k v* - set a value by key
 
- + `System::halt` *proc* - halt process proc
+ + `Dict::erase` *d k* - erase a value by key
+
+ + `Dict::keys` *d* - dictionary keys as list
+
+## <egel/src/builtin_ffi.hpp>
+
+ + `FFI::find_library` *s* - find a library
+
+ + `FFI::load_library` *s* - load a library
+
+ + `FFI::function` *l s* - find a function
+
+ + `FFI::call` *f r x* - call a function
+
+ + `FFI::malloc` *n* - allocate a number of bytes
+
+ + `FFI::free` *p* - free memory
+
+ + `FFI::peek` *p n t* - peek n bytes beyond p for value of type t
+
+ + `FFI::to_utf8` *s* - get void* from text
+
+ + `FFI::from_utf8` *s* - get void* from text
+
+ + `FFI::poke` *p n v* - poke n bytes beyond p a value v
 
 ## <egel/lib/os/os.cpp>
 
@@ -289,6 +313,8 @@
  + `OS::server` *port in* - create a serverobject
 
  + `OS::client` *host port* - create a client channel
+
+ + `OS::exec` *c* - system exec command
 
 ## <egel/lib/fs/fs.cpp>
 
@@ -426,18 +452,6 @@
 
  + `Math::between` *min max* - return a random number between min and max
 
-## <egel/lib/dict/dict.cpp>
-
- + `Dict::has` *d k* - check for key
-
- + `Dict::get` *d k* - get a value by key
-
- + `Dict::set` *d k v* - set a value by key
-
- + `Dict::erase` *d k* - erase a value by key
-
- + `Dict::keys` *d* - dictionary keys as list
-
 ## <egel/include/prelude.eg>
 
  + `System::or` *p q* - boolean or
@@ -456,6 +470,10 @@
 
  + `System::|>` *x f* - reverse application
 
+ + `System::||>` *x f* - reverse application ignoring none
+
+ + `System::@` *f x* - low binding application
+
  + `System::flip` *f x y* - flip two arguments
 
  + `System::join` *f x* - f x x
@@ -466,9 +484,15 @@
 
  + `System::trace` *n f x* - trace iteration of a function
 
+ + `System::trace_until` *f g x* - trace until a guard holds
+
+ + `System::trace_while` *f g x* - trace while a guard holds
+
  + `System::while` *f x* - apply f as long as it reduces
 
- + `System::fst` *(x, y)* - proj0 on pair
+ + `System::swap` *(x,y)* - swap a tuple
+
+ + `System::proj` *n (x, .., y)* - projection on tuple
 
  + `System::fst` *(x, y)* - proj1 on tuple
 
@@ -490,6 +514,8 @@
 
  + `List::scanl` *f z l* - left scan on a list
 
+ + `List::reduce` *f l* - reduce on non-empty list
+
  + `List::head` *l* - head of a list
 
  + `List::tail` *l* - tail of a list
@@ -498,17 +524,27 @@
 
  + `List::init` *l* - init of a list
 
+ + `List::inits` *l* - inits of a list
+
+ + `List::tails` *l* - tails of a list
+
  + `List::++` *l0 l1* - concatenation of two lists
 
  + `List::postpend` *l e* - postpend an element
 
  + `List::map` *f l* - map a function over a list
 
+ + `List::concat_map` *f l* - map a function producing lists over a list
+
  + `List::reverse` *l* - reverse a list
 
  + `List::block` *n* - list of number from 0 to n exclusive
 
  + `List::repeat` *n x* - list of n x elements
+
+ + `List::power` *l* - powerset of a list
+
+ + `List::combine` *ll* - all lists that are the product of the members of a list of lists
 
  + `List::nth` *n l* - nth element of a list
 
@@ -550,13 +586,13 @@
 
  + `List::not_elem` *x l* - inverse membership test
 
- + `List::union` *x l* - union of two lists (nˆ2 complexity)
+ + `List::union` *l0 l1* - union of two lists (nˆ2 complexity)
 
- + `List::intersection` *x l* - intersection of two lists (nˆ2 complexity)
+ + `List::intersection` *l0 l1* - intersection of two lists (nˆ2 complexity)
+
+ + `List::difference` *l0 l1* - intersection of two lists (nˆ2 complexity)
 
  + `List::insert_everywhere` *x l* - insert a member in every position of a list
-
- + `List::concat_map` *f l* - concat map
 
  + `List::permutations` *l* - all permutations of a list
 
@@ -598,8 +634,6 @@
 
  + `Search::message` *m* - fail or raise with message m
 
- + `Search::no_fail` *p* - this search may not fail
-
  + `Search::parallel` *p q* - try alternatives p or q
 
  + `Search::serial` *p q* - try alternative p then force q
@@ -612,11 +646,11 @@
 
  + `Search::<+>` *p q* - try alternatives p or q
 
- + `Search::<+>` *p q* - try alternatives p then q
+ + `Search::<->` *p q* - try alternative p then q
 
- + `Search::</>` *p q* - try alternatives p then q optionally
+ + `Search::<*>` *p q* - try alternative p then force q
 
- + `Search::<*>` *p q* - try alternatives p then force q
+ + `Search::</>` *p q* - try alternative p then q optionally
 
  + `Search::<@>` *p f* - apply f to the result of p
 
@@ -632,7 +666,7 @@
 
  + `Search::star_sep` *p s* - zero or more p separated by s
 
- + `Search::search` *p s* - search with p on state s 
+ + `Search::search` *p f t e s* - search with p on state s 
 
 ## <egel/include/map.eg>
 
@@ -779,44 +813,4 @@
  + `Gen::range` *l0 l1 f* - iterate over elements of two lists
 
  + `Gen::range` *l0 l1 l2 f* - iterate over elements of three lists
-
-## <egel/include/tinydb.eg>
-
- + `Tiny::db_tiny` *h p* - tiny database object from a home and path
-
- + `Tiny::db_home` *db* - retrieve the home location
-
- + `Tiny::db_path` *db* - retrieve the database name
-
- + `Tiny::db_location` *db* - path to database
-
- + `Tiny::db_location` *db table* - path to a table
-
- + `Tiny::db_exists` *db* - does this database exist
-
- + `Tiny::db_create` *db* - create the database
-
- + `Tiny::db_list_tables` *db* - list all tables in database
-
- + `Tiny::db_create_table` *db table* - create a table in the database
-
- + `Tiny::db_drop_table` *db table* - drop a table from the database
-
- + `Tiny::db_list_records` *db table* - list all records from a table 
-
- + `Tiny::db_read_table` *db table* - read all table returning key/value pairs
-
- + `Tiny::db_record_location` *db table key* - record location on the filesystem
-
- + `Tiny::db_create_record` *db table key value* - store a new key/value 
-
- + `Tiny::db_update_record` *db table key value* - update a key/value 
-
- + `Tiny::db_write_record` *db table key value* - unconditionally create record
-
- + `Tiny::db_write_record` *db table key* - retrieve a record value
-
- + `Tiny::db_remove_record` *db table key* - remove a record by key
-
- + `Tiny::db_transaction` *db f* - a transaction is a program holding on to a lock
 
