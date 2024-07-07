@@ -240,9 +240,15 @@
 
  + `System::set_def` *s e* - define symbol s as expression e
 
-## <egel/src/builtin_thread.hpp>
+## <egel/src/builtin_async.hpp>
 
- + `System::par` *f g* - concurrently evaluate 'f none' and 'g none'
+ + `System::async` *f* - create a task
+
+ + `System::await` *f* - wait for async task
+
+ + `System::wait_for` *f n* - check whether f reduced in n milliseconds
+
+ + `System::is_valid` *f* - check whether f reduced
 
 ## <egel/src/builtin_dict.hpp>
 

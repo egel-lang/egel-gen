@@ -17,7 +17,7 @@ val builtins = {
         "egel/src/builtin_string.hpp",
         "egel/src/builtin_eval.hpp",
         "egel/src/builtin_runtime.hpp",
-        "egel/src/builtin_thread.hpp",
+        "egel/src/builtin_async.hpp",
         "egel/src/builtin_dict.hpp",
         "egel/src/builtin_ffi.hpp"
 #        "egel/src/builtin_process.hpp"
