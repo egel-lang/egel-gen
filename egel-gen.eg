@@ -19,8 +19,8 @@ val builtins = {
         "egel/src/builtin_runtime.hpp",
         "egel/src/builtin_async.hpp",
         "egel/src/builtin_dict.hpp",
+        "egel/src/builtin_time.hpp",
         "egel/src/builtin_ffi.hpp"
-#        "egel/src/builtin_process.hpp"
 }
 
 val modules = {
@@ -36,7 +36,6 @@ val preludes = {
         "egel/include/search.eg",
         "egel/include/map.eg",
         "egel/include/generator.eg"
-#        "egel/include/tinydb.eg"
 }
 
 val sources = builtins ++ (modules ++ preludes)
