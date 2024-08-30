@@ -2,9 +2,14 @@
 # Egel combinator documentation extractor.
 
 import "prelude.eg"
+import "calculate.eg"
+import "search.eg"
+import "map.eg"
+import "generator.eg"
+import "dictionary.eg"
 import "os.ego"
 import "fs.ego"
-import "regex.ego"
+import "random.ego"
 
 using System
 using List
@@ -12,98 +17,55 @@ using List
 # constants with all source code locations
 
 val builtins = { 
-        "egel/src/builtin_system.hpp",
-        "egel/src/builtin_math.hpp",
-        "egel/src/builtin_string.hpp",
-        "egel/src/builtin_eval.hpp",
-        "egel/src/builtin_runtime.hpp",
-        "egel/src/builtin_async.hpp",
-        "egel/src/builtin_dict.hpp",
-        "egel/src/builtin_time.hpp",
-        "egel/src/builtin_ffi.hpp"
+        "system",
+        "math",
+        "string",
+        "regex",
+        "dict",
+        "async",
+        "eval",
+        "runtime",
+        "time",
+        "ffi"
 }
 
-val modules = {
-        "egel/lib/os/os.cpp",
-        "egel/lib/fs/fs.cpp",
-        "egel/lib/regex/regex.cpp",
-        "egel/lib/random/random.cpp"
+val dynamic = {
+        "os",
+        "fs",
+        "random"
 }
 
 val preludes = {
-        "egel/include/prelude.eg",
-        "egel/include/calculate.eg",
-        "egel/include/search.eg",
-        "egel/include/map.eg",
-        "egel/include/generator.eg"
+        "prelude.eg",
+        "calculate.eg",
+        "search.eg",
+        "generator.eg"
 }
 
-val sources = builtins ++ (modules ++ preludes)
-
-# read in sources
-
-data source
-
-def file_check =
-    [ FN -> 
-#        print (format "checking file: {}\n" FN);
-        if OS::exists FN 
-        then none # print (format "reading file {}\n" FN) 
-        else throw (format "didn't find file {}" FN) ]
-
-def file_readlines =
-    [ FS ->
-        let L = OS::read_line FS in
-        if OS::eof FS then nil else cons L (file_readlines FS) ]
-
-def file_input =
-    [ FN ->
-        file_check FN;
-        source FN (file_readlines (OS::open_in FN)) ]
+val modules = builtins ++ (dynamic ++ preludes)
 
 # filter with a regex match against a documentation comment
 
-val regex_comment = Regex::compile "(?:(?: *)|(?:\\/\\/) *)##.*"
+val regex_combinator = Regex::compile "([^ ]*)::([^ ]*) ([^-]*)-(.*)"
+val regex_local = Regex::compile "Local"
 
-def filter_doc =
-    [ (source FN LL) ->
-        source FN (filter (Regex::match regex_comment) LL) ]
-
-# extract combinator declarations
-
-data comb
-
-val regex_combinator = Regex::compile "(?:(?: *)|(?:\\/\\/) *)## +([^ ]*)::([^ ]*) (.*) - (.*)"
-
-def line_to_comb =
+def combinator_docstring =
     [ L ->
-        let CC = Regex::group regex_combinator L in
-        [ {A,B,C,D} -> comb A B C D | _ -> comb ] CC ]
-
-def source_to_comb =
-    [ (source FN LL) -> source FN (map line_to_comb LL) ]
+        (if Regex::matches regex_local (to_text L) == {} then docstring L else none)
+        |> [none -> none | L -> Regex::group regex_combinator L]
+        |> [ {A,B,"",D} -> format " + `{}::{}` - {}\n\n" A B D 
+           | {A,B,C,D} -> format " + `{}::{}` *{}* - {}\n\n" A B (String::trim C) D 
+           | _ -> "" ] ]
 
 # generate a short markdown document
 
-def comb_to_md =
-    [ (comb A B C D) -> print (format " + `{}::{}` *{}* - {}\n\n" A B C D)
-    | _ -> none ]
-
-def source_to_md =
-    [ (source FN CC) ->
-        print (format "## <{}>\n\n" FN);
-        map comb_to_md CC ]
-
-def sources_to_md =
-    [ CC -> 
-        print "# Egel interpreter builtin combinators\n\n";
-        map source_to_md CC;
-        none ]
-
-# tying it all together
+def module_to_md =
+    [N ->
+        query_modules |> filter [M -> query_module_name M == N] |> head
+        |> [M -> format "## {}\n\n" N + format "{}\n\n" (docstring M) + reduce (+) (map combinator_docstring (query_module_exports M))] ]
 
 def main =
-    let DD = map file_input sources in
-    let DD = map filter_doc DD in
-    let CC = map source_to_comb DD in
-        sources_to_md CC
+    print "# Egel interpreter builtin combinators\n\n";
+    map module_to_md modules |> map [X -> print X];
+    none
+
