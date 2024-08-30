@@ -1,858 +1,883 @@
 # Egel interpreter builtin combinators
 
-## <egel/src/builtin_system.hpp>
+## system
 
- + `System::k` *x y* - k combinator
+The 'system' module defines primitive combinators.
 
- + `System::id` *x* - identity combinator
+ + `System::k` *x y* -  k combinator
 
- + `System::!-` *x* - monadic minus
+ + `System::id` *x* -  identity combinator
 
- + `System::+` *x y* - addition
+ + `System::max_int` -  maximum for integers
 
- + `System::+` *x y* - substraction
+ + `System::+` *x y* -  addition
 
- + `System::*` *x y* - multiplication
+ + `System::!-` *x* -  monadic minus
 
- + `System::/` *x y* - division
+ + `System::+` *x y* -  substraction
 
- + `System::%` *x y* - modulo
+ + `System::*` *x y* -  multiplication
 
- + `System::&` *x y* - bitwise and
+ + `System::/` *x y* -  division
 
- + `System::$` *x y* - bitwise or
+ + `System::%` *x y* -  modulo
 
- + `System::^` *x y* - bitwise xor
+ + `System::<` *x y* -  builtin less
 
- + `System::!~` *x* - bitwise complement
+ + `System::<=` *x y* -  builtin less or equals
 
- + `System::<<` *x y* - bitwise left shift
+ + `System::>` *x y* -  builtin greater
 
- + `System::>>` *x y* - bitwise right shift
+ + `System::>=` *x y* -  builtin greater or equals
 
- + `System::<` *x y* - builtin less
+ + `System::==` *x y* -  builtin equality
 
- + `System::<=` *x y* - builtin less or equals
+ + `System::/=` *x y* -  builtin inequality
 
- + `System::>` *x y* - builtin greater
+ + `System::&` *x y* -  bitwise and
 
- + `System::>=` *x y* - builtin greater or equals
+ + `System::$` *x y* -  bitwise or
 
- + `System::==` *x y* - builtin equality
+ + `System::^` *x y* -  bitwise xor
 
- + `System::/=` *x y* - builtin inequality
+ + `System::!~` *x* -  bitwise complement
 
- + `System::to_int` *x* - Try and convert an object to int
+ + `System::<<` *x y* -  bitwise left shift
 
- + `System::to_float` *x* - try and convert an object to float
+ + `System::>>` *x y* -  bitwise right shift
 
- + `System::to_text` *x* - try and convert an object to text
+ + `System::to_int` *x* -  Try and convert an object to int
 
- + `System::ref` *x* - create a reference object
+ + `System::to_float` *x* -  try and convert an object to float
 
- + `System::get_ref` *ref* - dereference
+ + `System::to_text` *x* -  try and convert an object to text
 
- + `System::set_ref` *ref x* - set reference objec
+ + `String::to_chars` *s* -  create a list of chars from a string
 
- + `System::arg` *n* - the n-th application argument, or none
+ + `String::from_chars` *s* -  create a string from a list of chars
 
- + `System::get_env` *s* - the value of environment variable, or none
+ + `System::version` -  version information of this executable
 
- + `System::munch` *o0 .. on* - terms to list
+ + `System::arg` *n* -  the n-th application argument, or none
 
- + `System::unmunch` *{o0 .. on}* - list to terms
+ + `System::get_env` *s* -  the value of environment variable, or none
 
- + `System::print` *o0 .. on* - print terms
+ + `System::args_to_list` *o0 .. on* -  arguments to list
 
- + `System::format` *fmt x0 ... * - create a formatted strin
+ + `System::list_to_app` *{o0 .. on}* -  list to application
 
-## <egel/src/builtin_math.hpp>
+ + `System::print` *o0 .. on* -  print terms
 
- + `Math::is_finite` *x* - test whether this float is finite
+ + `System::get_line` -  read a line from standard input
 
- + `Math::is_infinite` *x* - test whether this float is infinite
+ + `System::format` *fmt x0 ...* -  create a formatted strin
 
- + `Math::is_nan` *x* - test whether this float is Not a Number
+ + `System::ref` *x* -  create a reference object
 
- + `Math::is_normal` *x* - test whether this float is normal
+ + `System::set_ref` *ref x* -  set reference objec
 
- + `Math::abs` *x* - the absolute value of a number
+ + `System::get_ref` *ref* -  dereference
 
- + `Math::acos` *x* - the arccosine of a number
+## math
 
- + `Math::acosh` *x* - the hyperbolic arccosine of a number
+The 'math' module defines trigonometic and some other often used combinators.
 
- + `Math::asin` *x* - the arcsine of a number
+ + `Math::e` -  Euler's constant and the base of natural logarithms,
 
- + `Math::asinh` *x* - the hyperbolic arcsine of a number
+ + `Math::ln2` -  Natural logarithm of 2, approximately 0.693
 
- + `Math::atan` *x* - the arctangent of a number
+ + `Math::ln10` -  natural logarithm of 10, approximately 2.303
 
- + `Math::atanh` *x* - the hyperbolic arctangent of a number
+ + `Math::log2e` -  base 2 logarithm of E, approximately 1.443
 
- + `Math::atan2` *y x* - the arctangent of the quotient of its arguments
+ + `Math::log10e` -  base 10 logarithm of E, approximately 0.434
 
- + `Math::cbrt` *x* - the cube root of a number
+ + `Math::pi` -  ratio of the circumference of a circle to its diameter,
 
- + `Math::ceil` *x* - the ceiling of a number
+ + `Math::sqrt1_2` -  square root of 1/2; equivalently, 1 over the square root
 
- + `Math::cos` *x* - the cosine of a number
+ + `Math::sqrt2` -  square root of 2, approximately 1.414
 
- + `Math::cosh` *x* - the hyperbolic cosine of a number
+ + `Math::abs` *x* -  the absolute value of a number
 
- + `Math::exp` *x* - the exp of a number
+ + `Math::acos` *x* -  the arccosine of a number
 
- + `Math::expm1` *x* - subtracting 1 from exp
+ + `Math::acosh` *x* -  the hyperbolic arccosine of a number
 
- + `Math::floor` *x* - the largest integer less than or equal to a number
+ + `Math::asin` *x* -  the arcsine of a number
 
- + `Math::log` *x* - the natural logarithm (loge, also ln) of a number
+ + `Math::asinh` *x* -  the hyperbolic arcsine of a number
 
- + `Math::log1p` *x* - the natural logarithm of the next number
+ + `Math::atan` *x* -  the arctangent of a number
 
- + `Math::log10` *x* - the base 10 logarithm of a number
+ + `Math::atanh` *x* -  the hyperbolic arctangent of a number
 
- + `Math::log2` *x* - the base 2 logarithm of a number
+ + `Math::atan2` *y x* -  the arctangent of the quotient of its arguments
 
- + `Math::max` *x y* - the largest of two numbers
+ + `Math::cbrt` *x* -  the cube root of a number
 
- + `Math::min` *x y* - the smallest of two numbers
+ + `Math::ceil` *x* -  the ceiling of a number
 
- + `Math::pow` *x y* - base to the exponent power, that is, baseexponent
+ + `Math::cos` *x* -  the cosine of a number
 
- + `Math::round` *x* - the value of a number rounded to the nearest
+ + `Math::cosh` *x* -  the hyperbolic cosine of a number
 
- + `Math::sign` *x* - the sign of the a number
+ + `Math::exp` *x* -  the exp of a number
 
- + `Math::sin` *x* - the sine of a number
+ + `Math::expm1` *x* -  subtracting 1 from exp
 
- + `Math::sinh` *x* - the hyperbolic sine of a number
+ + `Math::floor` *x* -  the largest integer less than or equal to a number
 
- + `Math::sqrt` *x* - the positive square root of a number
+ + `Math::log` *x* -  the natural logarithm (loge, also ln) of a number
 
- + `Math::tan` *x* - the tangent of a number
+ + `Math::log1p` *x* -  the natural logarithm of the next number
 
- + `Math::tanh` *x* - the hyperbolic tangent of a number
+ + `Math::log10` *x* -  the base 10 logarithm of a number
 
- + `Math::trunc` *x* - the integral part of a number
+ + `Math::log2` *x* -  the base 2 logarithm of a number
 
-## <egel/src/builtin_string.hpp>
+ + `Math::max` *x y* -  the largest of two numbers
 
- + `String::eq` *s0 s1* - string equality operator
+ + `Math::min` *x y* -  the smallest of two numbers
 
- + `String::neq` *s0 s1* - inequality operator
+ + `Math::pow` *x y* -  base to the exponent power, that is, baseexponent
 
- + `String::gt` *s0 s1* - greater than operator
+ + `Math::random` -  a pseudo-random number between 0 and 1
 
- + `String::ls` *s0 s1* - less than operator
+ + `Math::round` *x* -  the value of a number rounded to the nearest
 
- + `String::ge` *s0 s1* - greater than or equal operator
+ + `Math::sign` *x* -  the sign of the a number
 
- + `String::le` *s0 s1* - stringLess than or equal operator
+ + `Math::sin` *x* -  the sine of a number
 
- + `String::compare` *s0 s1* - compare the characters bitwise
+ + `Math::sinh` *x* -  the hyperbolic sine of a number
 
- + `String::compare_order` *s0 s1* - compare in code point order
+ + `Math::sqrt` *x* -  the positive square root of a number
 
- + `String::case_compare` *s0 s1* - compare two strings case-insensitivel
+ + `Math::tan` *x* -  the tangent of a number
 
- + `String::extract` *n0 n1 s* - extract range of chars from text
+ + `Math::tanh` *x* -  the hyperbolic tangent of a number
 
- + `String::starts_with` *s0 s1* - starts with initial segment
+ + `Math::trunc` *x* -  the integral part of a number
 
- + `String::ends_with` *s0 s1* - ends with segment
+## string
 
- + `String::index_of` *s0 s1* - the first occurrence of a text
+The 'string' module defines string manipulation combinators.
 
- + `String::last_index_of` *s0 s1* - the last occurrence of a text
+ + `String::eq` *s0 s1* -  string equality operator
 
- + `String::char_at` *n s* - the char at offset
+ + `String::neq` *s0 s1* -  inequality operator
 
- + `String::move_index` *index delta s* - move index by delta chars
+ + `String::gt` *s0 s1* -  greater than operator
 
- + `String::count` *s* - number of chars
+ + `String::ls` *s0 s1* -  less than operator
 
- + `String::is_empty` *s* - test whether the text is empty
+ + `String::ge` *s0 s1* -  greater than or equal operator
 
- + `String::hash_code` *s* - generate a hash code for this text
+ + `String::le` *s0 s1* -  stringLess than or equal operator
 
- + `String::is_bogus` *s* - determine if this object contains a valid string
+ + `String::compare` *s0 s1* -  compare the characters bitwise
 
- + `String::append` *s0 s1* - append two texts
+ + `String::compare_order` *s0 s1* -  compare in code point order
 
- + `String::insert` *s0 n s1* - insert at given position
+ + `String::case_compare` *s0 s1* -  compare two strings case-insensitivel
 
- + `String::replace` *s0 s1 s2* - replace all occurrences
+ + `String::extract` *n0 n1 s* -  extract range of chars from text
 
- + `String::remove` *n0 n1 s* - remove characters in range
+ + `String::starts_with` *s0 s1* -  starts with initial segment
 
- + `String::retain` *n0 n1 s* - retain the characters in the range
+ + `String::ends_with` *s0 s1* -  ends with segment
 
- + `String::trim` *s* - trims leading and trailing whitespac
+ + `String::index_of` *s0 s1* -  the first occurrence of a text
 
- + `String::reverse` *s* - reverse
+ + `String::last_index_of` *s0 s1* -  the last occurrence of a text
 
- + `String::to_upper` *s* - convert to upper case
+ + `String::char_at` *n s* -  the char at offset
 
- + `String::to_lower` *s* - convert to lower case
+ + `String::move_index` *index delta s* -  move index by delta chars
 
- + `String::fold_case` *s* - case-folds the character
+ + `String::count` *s* -  number of chars
 
- + `String::unescape` *s* - unescape characters
+ + `String::is_empty` *s* -  test whether the text is empty
 
- + `String::ord` *c* - integer value of unicode point/character
+ + `String::hash_code` *s* -  generate a hash code for this text
 
- + `String::chr` *n* - unicode point of integer value
+ + `String::is_bogus` *s* -  determine if this object contains a valid string
 
- + `String::to_chars` *s* - create a list of chars from a string
+ + `String::append` *s0 s1* -  append two texts
 
- + `String::from_chars` *s* - create a string from a list of chars
+ + `String::insert` *s0 n s1* -  insert at given position
 
-## <egel/src/builtin_eval.hpp>
+ + `String::replace` *s0 s1 s2* -  replace all occurrences
 
- + `System::eval` *text* - evaluatate the expression in `text`
+ + `String::remove` *n0 n1 s* -  remove characters in range
 
-## <egel/src/builtin_runtime.hpp>
+ + `String::retain` *n0 n1 s* -  retain the characters in the range
 
- + `System::dis` *o* - disassemble a combinator object
+ + `String::trim` *s* -  trims leading and trailing whitespac
 
- + `System::asm` *s* - assemble bytecode into a combinator
+ + `String::reverse` *s* -  reverse
 
- + `System::serialize` *t* - serialize a term to a text
+ + `String::to_upper` *s* -  convert to upper case
 
- + `System::deserialize` *t* - serialize a text to a term
+ + `String::to_lower` *s* -  convert to lower case
 
- + `System::is_module` *m* - check we have a module
+ + `String::fold_case` *s* -  case-folds the character
 
- + `System::query_module_name` *m* - get the name of the module
+ + `String::ord` *c* -  integer value of unicode point/character
 
- + `System::query_module_path` *m* - get the path of the module
+ + `String::chr` *n* -  unicode point of integer value
 
- + `System::query_module_imports` *m* - get the path of the module
+ + `String::unescape` *s* -  unescape characters
 
- + `System::query_module_exports` *m* - get the path of the module
+## regex
 
- + `System::query_module_values` *m* - get the path of the module
+The 'regex' module defines operations on regular expressions.
 
- + `System::set_data` *s* - define text as data
+ + `Regex::compile` *s0* -  compile text to a pattern
 
- + `System::set_def` *s e* - define text as expression
+ + `Regex::match` *pat s0* -  true if the pattern matches the entire string
 
-## <egel/src/builtin_async.hpp>
+ + `Regex::look_at` *pat s0* -  true if the pattern matches the start of string
 
- + `System::async` *f* - create a task
+ + `Regex::look_match` *pat s0* -  the initial matched part of the string
 
- + `System::await` *f* - wait for async task
+ + `Regex::split` *pat s0* -  split a text according to a pattern
 
- + `System::wait_for` *f n* - check whether future reduced during milliseconds
+ + `Regex::matches` *pat s0* -  a list of pattern matches in a string
 
- + `System::is_valid` *f* - check whether future is reduced
+ + `Regex::replace` *pat s0 s1* -  replace the first occurence of a pattern
 
- + `System::sleep` *n* - sleep for a number of milliseconds
+ + `Regex::replace_all` *pat s0 s1* -  replace all occurences of a pattern 
 
-## <egel/src/builtin_dict.hpp>
+ + `Regex::group` *pat s0* -  the matched groups in a string
 
- + `Dict::has` *d k* - check for key
+## dict
 
- + `Dict::get` *d k* - get a value by key
+The 'dict' module defines mutable dictionaries.
 
- + `Dict::set` *d k v* - set a value by key
+ + `Dict::dict` -  create a dict object
 
- + `Dict::erase` *d k* - erase a value by key
+ + `Dict::has` *d k* -  check for key
 
- + `Dict::keys` *d* - dictionary keys as list
+ + `Dict::get` *d k* -  get a value by key
 
-## <egel/src/builtin_time.hpp>
+ + `Dict::set` *d k v* -  set a value by key
 
- + `Time::clock` *s* - create a clock object
+ + `Dict::erase` *d k* -  erase a value by key
 
- + `Time::now` *c* - current time according to a clock
+ + `Dict::keys` *d* -  dictionary keys as list
 
- + `Time::is_steady` *c* - is a steady clock
+## async
 
- + `Time::milliseconds` *n* - a number of milliseconds
+The 'async' module defines concurrency combinators.
 
- + `Time::seconds` *n* - a number of seconds
+ + `System::async` *f* -  create a task
 
- + `Time::minutes` *n* - a number of minutes
+ + `System::await` *f* -  wait for async task
 
- + `Time::hours` *n* - a number of hours
+ + `System::wait_for` *f n* -  check whether future reduced during milliseconds
 
- + `Time::days` *n* - a number of days
+ + `System::is_valid` *f* -  check whether future is reduced
 
- + `Time::weeks` *n* - a number of weeks
+ + `System::sleep` *n* -  sleep for a number of milliseconds
 
- + `Time::months` *n* - a number of months
+## eval
 
- + `Time::years` *n* - a number of years
+The 'eval' module defines the eval combinator.
 
- + `Time::local_time` *n* - time point to local date
+ + `System::eval` *text* -  evaluatate the expression in `text`
 
- + `Time::gm_time` *n* - time point to gm date
+## runtime
 
- + `Time::date_to_time` *n* - date to time point
+The 'runtime' module provides binding to the runtime.
 
- + `Time::date_to_tuple` *n* - date to tuple
+ + `System::dis` *o* -  disassemble a combinator object
 
- + `Time::date_from_tuple` *n* - date from tuple
+ + `System::asm` *s* -  assemble bytecode into a combinator
 
-## <egel/src/builtin_ffi.hpp>
+ + `System::serialize` *t* -  serialize a term to a text
 
- + `FFI::find_library` *s* - find a library
+ + `System::deserialize` *t* -  serialize a text to a term
 
- + `FFI::load_library` *s* - load a library
+ + `System::docstring` *o* -  docstring of a module or combinator
 
- + `FFI::function` *l s* - find a function
+ + `System::query_modules` -  list all modules in the runtime
 
- + `FFI::call` *f r x* - call a function
+ + `System::is_module` *m* -  check we have a module
 
- + `FFI::malloc` *n* - allocate a number of bytes
+ + `System::query_module_name` *m* -  get the name of the module
 
- + `FFI::free` *p* - free memory
+ + `System::query_module_path` *m* -  get the path of the module
 
- + `FFI::peek` *p n t* - peek a number of bytes beyond for value of type
+ + `System::query_module_imports` *m* -  get the imports of the module
 
- + `FFI::poke` *p n v* - poke a value a number of bytes beyond pointer
+ + `System::query_module_exports` *m* -  get the exports of the module
 
- + `FFI::to_utf8` *s* - get pointer from text
+ + `System::query_module_values` *m* -  get the values of the module
 
- + `FFI::from_utf8` *s* - get text from pointer
+## time
 
-## <egel/lib/os/os.cpp>
+The 'time' module defines time and date combinators.
 
- + `OS::open_in` *fn* - create a channel from filename
+ + `Time::clock` *s* -  create a clock object
 
- + `OS::open_out` *fn* - create a channel from filename
+ + `Time::now` *c* -  current time according to a clock
 
- + `OS::close` *c* - close a channel
+ + `Time::is_steady` *c* -  is a steady clock
 
- + `OS::read` *c* - read a string from a channel
+ + `Time::milliseconds` *n* -  a number of milliseconds
 
- + `OS::read_byte` *c* - read a byte from a channel
+ + `Time::seconds` *n* -  a number of seconds
 
- + `OS::read_line` *c* - read a line from a channel
+ + `Time::minutes` *n* -  a number of minutes
 
- + `OS::read_all` *c* - read entire channel content
+ + `Time::hours` *n* -  a number of hours
 
- + `OS::write` *c s* - write a string to a channel
+ + `Time::days` *n* -  a number of days
 
- + `OS::write_byte` *c b* - write a byte to a channel
+ + `Time::weeks` *n* -  a number of weeks
 
- + `OS::write_line` *c s* - write a string s to a channel
+ + `Time::months` *n* -  a number of months
 
- + `OS::flush` *c* - flush a channel
+ + `Time::years` *n* -  a number of years
 
- + `OS::eof` *c* - tests if there is no more input
+ + `Time::local_time` *n* -  time point to local date
 
- + `OS::flock` *f n* - create a filesystem lock file (not process safe)
+ + `Time::gm_time` *n* -  time point to gm date
 
- + `OS::exit` *n* - flush all channels and terminate process with exit code n
+ + `Time::date_to_time` *n* -  date to time point
 
- + `OS::accept` *serverobject* - accept connections
+ + `Time::date_to_tuple` *n* -  date to tuple
 
- + `OS::server` *port in* - create a serverobject
+ + `Time::date_from_tuple` *n* -  date from tuple
 
- + `OS::client` *host port* - create a client channel
+## ffi
 
- + `OS::exec` *c* - system exec command
+The 'ffi' module defines c foreign interface combinators.
 
-## <egel/lib/fs/fs.cpp>
+ + `FFI::load_library` *s* -  load a library
 
- + `OS::concat` *p0 p1* - concatenates two paths
+ + `FFI::function` *l s* -  find a function
 
- + `OS::concat_with` *p0 p1* - concatenates two paths with a directory separator
+ + `FFI::call` *f r x* -  call a function
 
- + `OS::empty` *p* - checks whether the path is empty
+ + `FFI::malloc` *n* -  allocate a number of bytes
 
- + `OS::has_root_path` *p* - checks whether the path has a root path
+ + `FFI::free` *p* -  free memory
 
- + `OS::has_root_name` *p* - checks whether path has a root name
+ + `FFI::peek` *p n t* -  peek a number of bytes beyond for value of type
 
- + `OS::has_root_directory` *p* - checks whether the path has a root directory
+ + `FFI::poke` *p n v* -  poke a value a number of bytes beyond pointer
 
- + `OS::has_relative_path` *p* - checks whether the path has a relative path
+ + `FFI::to_utf8` *s* -  get pointer from text
 
- + `OS::has_parent_path` *p* - checks whether the path has a parent path
+ + `FFI::from_utf8` *s* -  get text from pointer
 
- + `OS::has_filename` *p* - checks whether the path has a filename
+## os
 
- + `OS::has_stem` *p* - checks whether the path has a stem
+The 'os' module defines basic input/output combinators.
 
- + `OS::has_extension` *p* - checks whether the path has an extension
+ + `OS::cin` -  standard input channel
 
- + `OS::is_absolute` *p* - checks whether the path is absolute
+ + `OS::stdout` -  standard output channel
 
- + `OS::is_relative` *p* - checks whether the path is relative
+ + `OS::stderr` -  standard error channel
 
- + `OS::root_name` *p* - returns the root-name of the path, if present
+ + `OS::open_in` *fn* -  create a channel from filename
 
- + `OS::root_directory` *p* - returns the root directory of the path, if present
+ + `OS::open_out` *fn* -  create a channel from filename
 
- + `OS::root_path` *p* - returns the root path of the path, if present
+ + `OS::close` *c* -  close a channel
 
- + `OS::relative_path` *p* - returns path relative to the root path
+ + `OS::read` *c* -  read a string from a channel
 
- + `OS::parent_path` *p* - returns the path of the parent path
+ + `OS::read_byte` *c* -  read a byte from a channel
 
- + `OS::filename` *p* - returns the filename path component
+ + `OS::read_line` *c* -  read a line from a channel
 
- + `OS::stem` *p* - returns the stem path component
+ + `OS::read_all` *c* -  read entire channel content
 
- + `OS::extension` *p* - returns the file extension path component
+ + `OS::write` *c s* -  write a string to a channel
 
- + `OS::absolute` *p* - composes an absolute path
+ + `OS::write_byte` *c b* -  write a byte to a channel
 
- + `OS::copy` *src dst* - copies files or directories
+ + `OS::write_line` *c s* -  write a string s to a channel
 
- + `OS::copy_file` *src dst* - copies file contents
+ + `OS::flush` *c* -  flush a channel
 
- + `OS::copy_symlink` *src trg* - copies a symbolic link
+ + `OS::eof` *c* -  tests if there is no more input
 
- + `OS::create_directory` *p* - creates new directory
+ + `OS::flock` *f n* -  create a filesystem lock file (not process safe)
 
- + `OS::create_directories` *p* - creates new directories
+ + `OS::exit` *n* -  flush all channels and terminate process with exit code n
 
- + `OS::create_hard_link` *p0 p1* - creates a hard link
+ + `OS::exec` *c* -  system exec command
 
- + `OS::create_symlink` *p0 p1* - creates a symbolic link
+ + `OS::get_key` -  key press from console
 
- + `OS::create_directory_symlink` *p0 p1* - creates a symbolic link
+## fs
 
- + `OS::set_current_path` *p* - sets the current working directory
+The 'fs' module defines file system inspection and modification combinators.
 
- + `OS::exists` *p* - checks whether path refers to existing file system object
+ + `OS::concat` *p0 p1* -  concatenates two paths
 
- + `OS::equivalent` *p0 p1* - checks whether two paths refer to the same file
+ + `OS::concat_with` *p0 p1* -  concatenates two paths with a directory separator
 
- + `OS::file_size` *p* - returns the size of a file
+ + `OS::empty` *p* -  checks whether the path is empty
 
- + `OS::hard_link_count` *p* - returns the number of hard links 
+ + `OS::has_root_path` *p* -  checks whether the path has a root path
 
- + `OS::permissions` *p* - get file access permissions
+ + `OS::has_root_name` *p* -  checks whether path has a root name
 
- + `OS::replace_permissions` *p n* - set file access permissions
+ + `OS::has_root_directory` *p* -  checks whether the path has a root directory
 
- + `OS::read_symlink` *p* - obtains the target of a symbolic link
+ + `OS::has_relative_path` *p* -  checks whether the path has a relative path
 
- + `OS::remove` *p* - removes a file or empty directory
+ + `OS::has_parent_path` *p* -  checks whether the path has a parent path
 
- + `OS::remove_all` *p* - removes a file or directory and all its contents
+ + `OS::has_filename` *p* -  checks whether the path has a filename
 
- + `OS::rename` *p0 p1* - moves or renames a file or directory
+ + `OS::has_stem` *p* -  checks whether the path has a stem
 
- + `OS::resize_file` *p n* - changes the size of a regular file 
+ + `OS::has_extension` *p* -  checks whether the path has an extension
 
- + `OS::space_free` *p* - determines free space on the file system
+ + `OS::is_absolute` *p* -  checks whether the path is absolute
 
- + `OS::space_capacity` *p* - determines capacity space on the file system
+ + `OS::is_relative` *p* -  checks whether the path is relative
 
- + `OS::space_available` *p* - determines available space on the file system
+ + `OS::root_name` *p* -  returns the root-name of the path, if present
 
- + `OS::is_block_file` *p* - checks whether the given path refers to block device
+ + `OS::root_directory` *p* -  returns the root directory of the path, if present
 
- + `OS::is_character_file` *p* - the given path refers to a character device
+ + `OS::root_path` *p* -  returns the root path of the path, if present
 
- + `OS::is_directory` *p* - checks whether the given path refers to a directory
+ + `OS::relative_path` *p* -  returns path relative to the root path
 
- + `OS::is_empty` *p* - checks whether the given path refers to an empty file or
+ + `OS::parent_path` *p* -  returns the path of the parent path
 
- + `OS::is_fifo` *p* - checks whether the given path refers to a named pipe
+ + `OS::filename` *p* -  returns the filename path component
 
- + `OS::is_other` *p* - checks whether the argument refers to an other file
+ + `OS::stem` *p* -  returns the stem path component
 
- + `OS::is_regular_file` *p* - the argument refers to a regular file
+ + `OS::extension` *p* -  returns the file extension path component
 
- + `OS::is_socket` *p* - checks whether the argument refers to a named IPC socket
+ + `OS::absolute` *p* -  composes an absolute path
 
- + `OS::is_symlink` *p* - checks whether the argument refers to a symbolic link
+ + `OS::copy` *src dst* -  copies files or directories
 
- + `OS::directory` *p* - lists the content of a directory
+ + `OS::copy_file` *src dst* -  copies file contents
 
-## <egel/lib/regex/regex.cpp>
+ + `OS::copy_symlink` *src trg* -  copies a symbolic link
 
- + `Regex::compile` *s0* - compile text to a pattern
+ + `OS::create_directory` *p* -  creates new directory
 
- + `Regex::match` *pat s0* - true if the pattern matches the entire string
+ + `OS::create_directories` *p* -  creates new directories
 
- + `Regex::look_at` *pat s0* - true if the pattern matches the start of string
+ + `OS::create_hard_link` *p0 p1* -  creates a hard link
 
- + `Regex::look_match` *pat s0* - the initial matched part of the string
+ + `OS::create_symlink` *p0 p1* -  creates a symbolic link
 
- + `Regex::split` *pat s0* - split a text according to a pattern
+ + `OS::create_directory_symlink` *p0 p1* -  creates a symbolic link
 
- + `Regex::matches` *pat s0* - a list of pattern matches in a string
+ + `OS::current_path` -  returns the current working directory
 
- + `Regex::replace` *pat s0 s1* - replace the first occurence of a pattern
+ + `OS::set_current_path` *p* -  sets the current working directory
 
- + `Regex::replace_all` *pat s0 s1* - replace all occurences of a pattern 
+ + `OS::exists` *p* -  checks whether path refers to existing file system object
 
- + `Regex::group` *pat s0* - the matched groups in a string
+ + `OS::equivalent` *p0 p1* -  checks whether two paths refer to the same file
 
-## <egel/lib/random/random.cpp>
+ + `OS::file_size` *p* -  returns the size of a file
 
- + `Math::between` *min max* - a random number between min and max
+ + `OS::hard_link_count` *p* -  returns the number of hard links 
 
-## <egel/include/prelude.eg>
+ + `OS::permissions` *p* -  get file access permissions
 
- + `System::or` *p q* - boolean or
+ + `OS::replace_permissions` *p n* -  set file access permissions
 
- + `System::and` *p q* - boolean and
+ + `OS::read_symlink` *p* -  obtains the target of a symbolic link
 
- + `System::not` *p q* - boolean not
+ + `OS::remove` *p* -  removes a file or empty directory
 
- + `System::||` *p q* - 'lazy' or
+ + `OS::remove_all` *p* -  removes a file or directory and all its contents
 
- + `System::&&` *p q* - 'lazy' and
+ + `OS::rename` *p0 p1* -  moves or renames a file or directory
 
- + `System::fix` *f* - fixed point of f
+ + `OS::resize_file` *p n* -  changes the size of a regular file 
 
- + `System::.` *f g* - function composition
+ + `OS::space_free` *p* -  determines free space on the file system
 
- + `System::|>` *x f* - reverse application
+ + `OS::space_capacity` *p* -  determines capacity space on the file system
 
- + `System::||>` *x f* - reverse application ignoring none
+ + `OS::space_available` *p* -  determines available space on the file system
 
- + `System::@` *f x* - low binding application
+ + `OS::temp_directory_path` -  returns a directory suitable for temporary files
 
- + `System::flip` *f x y* - flip two arguments
+ + `OS::is_block_file` *p* -  checks whether the given path refers to block device
 
- + `System::join` *f x* - f x x
+ + `OS::is_character_file` *p* -  the given path refers to a character device
 
- + `System::uncurry` *f (x, y)* - uncurry arguments
+ + `OS::is_directory` *p* -  checks whether the given path refers to a directory
 
- + `System::iter` *n f x* - iterate a function
+ + `OS::is_empty` *p* -  checks whether the given path refers to an empty file or
 
- + `System::trace` *n f x* - trace iteration of a function
+ + `OS::is_fifo` *p* -  checks whether the given path refers to a named pipe
 
- + `System::trace_until` *f g x* - trace until a guard holds
+ + `OS::is_other` *p* -  checks whether the argument refers to an other file
 
- + `System::trace_while` *f g x* - trace while a guard holds
+ + `OS::is_regular_file` *p* -  the argument refers to a regular file
 
- + `System::while` *f x* - apply f as long as it reduces
+ + `OS::is_socket` *p* -  checks whether the argument refers to a named IPC socket
 
- + `System::swap` *(x,y)* - swap a tuple
+ + `OS::is_symlink` *p* -  checks whether the argument refers to a symbolic link
 
- + `System::proj` *n (x, .., y)* - projection on tuple
+ + `OS::directory` *p* -  lists the content of a directory
 
- + `System::fst` *(x, y)* - proj1 on tuple
+## random
 
- + `System::snd` *(x, y)* - proj2 on tuple
+The 'random' module defines randomization combinators. (Work in progress)
 
- + `System::abs` *x* - absolute
+ + `Math::between` *min max* -  a random number between min and max
 
- + `System::min` *x y* - minimum
+## prelude.eg
 
- + `System::max` *x y* - maximum
+The 'prelude' defines often used combinators.
 
- + `System::**` *x y* - power (temporary)
 
- + `System::printf` *s x0 .. xn* - print formatted
+ + `System::or` *p q* -  boolean or
 
- + `List::length` *l* - length of a list
+ + `System::and` *p q* -  boolean and
 
- + `List::foldl` *f z l* - left fold on a list
+ + `System::not` *p q* -  boolean not
 
- + `List::foldr` *f z l* - right fold on a list
+ + `System::||` *p q* -  'lazy' or
 
- + `List::scanl` *f z l* - left scan on a list
+ + `System::&&` *p q* -  'lazy' and
 
- + `List::reduce` *f l* - reduce on non-empty list
+ + `System::fix` *f* -  fixed point of f
 
- + `List::head` *l* - head of a list
+ + `System::.` *f g* -  function composition
 
- + `List::tail` *l* - tail of a list
+ + `System::|>` *x f* -  reverse application
 
- + `List::last` *l* - last of a list
+ + `System::||>` *x f* -  reverse application ignoring none
 
- + `List::init` *l* - init of a list
+ + `System::@` *f x* -  low binding application
 
- + `List::inits` *l* - inits of a list
+ + `System::flip` *f x y* -  flip two arguments
 
- + `List::tails` *l* - tails of a list
+ + `System::join` *f x* -  f x x
 
- + `List::++` *l0 l1* - concatenation of two lists
+ + `System::uncurry` *f (x, y)* -  uncurry arguments
 
- + `List::postpend` *l e* - postpend an element
+ + `System::iter` *n f x* -  iterate a function
 
- + `List::map` *f l* - map a function over a list
+ + `System::trace` *n f x* -  trace iteration of a function
 
- + `List::concat_map` *f l* - map a function producing lists over a list
+ + `System::trace_until` *f g x* -  trace until a guard holds
 
- + `List::reverse` *l* - reverse a list
+ + `System::trace_while` *f g x* -  trace while a guard holds
 
- + `List::block` *n* - list of number from 0 to n exclusive
+ + `System::while` *f x* -  apply f as long as it reduces
 
- + `List::repeat` *n x* - list of n x elements
+ + `System::swap` *(x,y)* -  swap a tuple
 
- + `List::power` *l* - powerset of a list
+ + `System::proj` *n (x, .., y)* -  projection on tuple
 
- + `List::combine` *ll* - all lists that are the product of the members of a list of lists
+ + `System::fst` *(x, y)* -  proj1 on tuple
 
- + `List::nth` *n l* - nth element of a list
+ + `System::snd` *(x, y)* -  proj2 on tuple
 
- + `List::index_of` *x xx* - index of a member in list
+ + `System::abs` *x* -  absolute
 
- + `List::insert` *n x l* - insert an element at given position
+ + `System::min` *x y* -  minimum
 
- + `List::take` *n l* - take the first elements of a list
+ + `System::max` *x y* -  maximum
 
- + `List::drop` *n l* - drop the first elements of a list
+ + `System::**` *x y* -  power (temporary)
 
- + `List::split_at` *n l* - take and drop the first elements of a list
+ + `System::printf` *s x0 .. xn* -  print formatted
 
- + `List::chunks` *n l* - list to list of chunks of given size
+ + `List::length` *l* -  length of a list
 
- + `List::from_to` *l u* - list of numbers for lower to upper (inclusive)
+ + `List::foldl` *f z l* -  left fold on a list
 
- + `List::filter` *p l* - filter all members from a list which satisfy a predicate
+ + `List::foldr` *f z l* -  right fold on a list
 
- + `List::split` *p l* - split a list into members and non-members of a predicate
+ + `List::scanl` *f z l* -  left scan on a list
 
- + `List::break` *p l* - split a list in two parts
+ + `List::reduce` *f l* -  reduce on non-empty list
 
- + `List::split_on` *x ll* - split a list on a member
+ + `List::head` *l* -  head of a list
 
- + `List::flatten` *ll* - flatten a list of lists to a list
+ + `List::tail` *l* -  tail of a list
 
- + `List::zip` *l0 l1* - zip to lists to a list of pairs
+ + `List::last` *l* -  last of a list
 
- + `List::zip_with` *f l0 l1* - apply a function pairwise to members of two lists
+ + `List::init` *l* -  init of a list
 
- + `List::transpose` *ll* - transpose a list of lists
+ + `List::inits` *l* -  inits of a list
 
- + `List::any` *p l* - checks whether any element of a list satisfies a predicate
+ + `List::tails` *l* -  tails of a list
 
- + `List::all` *p l* - checks whether all elements of a list  satisfies a predicate
+ + `List::++` *l0 l1* -  concatenation of two lists
 
- + `List::elem` *x l* - membership test
+ + `List::postpend` *l e* -  postpend an element
 
- + `List::not_elem` *x l* - inverse membership test
+ + `List::map` *f l* -  map a function over a list
 
- + `List::union` *l0 l1* - union of two lists (nˆ2 complexity)
+ + `List::concat_map` *f l* -  map a function producing lists over a list
 
- + `List::intersection` *l0 l1* - intersection of two lists (nˆ2 complexity)
+ + `List::reverse` *l* -  reverse a list
 
- + `List::difference` *l0 l1* - intersection of two lists (nˆ2 complexity)
+ + `List::block` *n* -  list of number from 0 to n exclusive
 
- + `List::insert_everywhere` *x l* - insert a member in every position of a list
+ + `List::repeat` *n x* -  list of n x elements
 
- + `List::permutations` *l* - all permutations of a list
+ + `List::power` *l* -  powerset of a list
 
- + `List::sort` *l* - merge sort 
+ + `List::pairs` *ll0 ll1* -  product of two lists
 
- + `List::sort_by` *f l* - merge sort with an order operator
+ + `List::combine` *ll* -  all lists that are the product of the members of a list of lists
 
- + `List::nub` *l* - remove consecutive duplicates
+ + `List::nth` *n l* -  nth element of a list
 
- + `List::unique` *l* - make all members unique
+ + `List::index_of` *x xx* -  index of a member in list
 
- + `List::range` *l f* - iterate over elements (reverse map
+ + `List::insert` *n x l* -  insert an element at given position
 
- + `List::range2` *l0 l1 f* - iterate over elements of two lists
+ + `List::take` *n l* -  take the first elements of a list
 
- + `List::range3` *l0 l1 l2 f* - iterate over elements of three lists
+ + `List::drop` *n l* -  drop the first elements of a list
 
-## <egel/include/calculate.eg>
+ + `List::split_at` *n l* -  take and drop the first elements of a list
 
- + `Calculate::return` *a* - calculate further with value
+ + `List::chunks` *n l* -  list to list of chunks of given size
 
- + `Calculate::chain` *f g* - chain two calculations
+ + `List::from_to` *l u* -  list of numbers for lower to upper (inclusive)
 
- + `Calculate::run` *f s* - run calculation on state
+ + `List::filter` *p l* -  filter all members from a list which satisfy a predicate
 
- + `Calculate::<*` *f g* - chain
+ + `List::split` *p l* -  split a list into members and non-members of a predicate
 
- + `Calculate::apply` *f g* - apply a function to a calculation
+ + `List::break` *p l* -  split a list in two parts
 
- + `Calculate::modify` *f g* - modify state
+ + `List::split_on` *x ll* -  split a list on a member
 
- + `Calculate::<@` *f g* - apply
+ + `List::flatten` *ll* -  flatten a list of lists to a list
 
- + `Calculate::<+` *f g* - modify
+ + `List::zip` *l0 l1* -  zip two lists to a list of pairs
 
-## <egel/include/search.eg>
+ + `List::zip_with` *f l0 l1* -  apply a function pairwise to members of two lists
 
- + `Search::success` *a* - succeed with value a
+ + `List::transpose` *ll* -  transpose a list of lists
 
- + `Search::message` *m* - fail or raise with message
+ + `List::any` *p l* -  checks whether any element of a list satisfies a predicate
 
- + `Search::parallel` *p q* - try both alternatives
+ + `List::all` *p l* -  checks whether all elements of a list  satisfies a predicate
 
- + `Search::serial` *p q* - try alternative, then force the next
+ + `List::elem` *x l* -  membership test
 
- + `Search::apply` *p f* - apply to the argument being calculated
+ + `List::not_elem` *x l* -  inverse membership test
 
- + `Search::opt` *p v* - optionally succeed with a value
+ + `List::union` *l0 l1* -  union of two lists (nˆ2 complexity)
 
- + `Search::serial_opt` *p q* - optionally succeed with value
+ + `List::intersection` *l0 l1* -  intersection of two lists (nˆ2 complexity)
 
- + `Search::<+>` *p q* - try both alternatives  
+ + `List::difference` *l0 l1* -  intersection of two lists (nˆ2 complexity)
 
- + `Search::<->` *p q* - try composition of alternatives
+ + `List::insert_everywhere` *x l* -  insert a member in every position of a list
 
- + `Search::<*>` *p q* - try alternative then force
+ + `List::permutations` *l* -  all permutations of a list
 
- + `Search::</>` *p q* - try alternative then optionally
+ + `List::sort` *l* -  merge sort 
 
- + `Search::<@>` *p f* - apply function to the result
+ + `List::sort_by` *f l* -  merge sort with an order operator
 
- + `Search::<!>` *p m* - set the failure message
+ + `List::nub` *l* -  remove consecutive duplicates
 
- + `Search::one` *p* - one time and return a singleton result
+ + `List::group` -  group duplicates
 
- + `Search::plus` *p* - one or more and return a list result
+ + `List::unique` *l* -  make all members unique
 
- + `Search::star` *p* - zero or more and return a list result
+ + `List::sum` *l* -  summation of list
 
- + `Search::plus_sep` *p s* - one or more with separator
+ + `List::product` *l* -  product of list
 
- + `Search::star_sep` *p s* - zero or more with separator
+ + `List::maximum` *l* -  maximum of list
 
- + `Search::search` *p f t e s* - search on state with three handlers
+ + `List::minimum` *l* -  minimum of list
 
-## <egel/include/map.eg>
+ + `List::range` *l f* -  iterate over elements (reverse map
 
- + `Map::is_empty` *m* - test for emptyness
+ + `List::range2` *l0 l1 f* -  iterate over elements of two lists
 
- + `Map::choose` *m* - look at one key from the map
+ + `List::range3` *l0 l1 l2 f* -  iterate over elements of three lists
 
- + `Map::maximum` *m* - take the maximum key/value from the map
+ + `System::args` -  arguments of the application
 
- + `Map::minimum` *m* - take the minimim key/value from the map
+ + `String::split` *n s* -  split a spring
 
- + `Map::size` *m* - size of the map
+ + `Math::lift_unary` *f* -  lift a unary function on floats to ints
 
- + `Map::look` *m k* - retrieve optional value from map with key
+ + `Math::lift_binary` *f* -  lift a binary function on floats to ints
 
- + `Map::has` *m k* - check for key in map
+ + `Math::pow_int` *n0 n1* -  power of two integer values
 
- + `Map::member` *m k v* - check whether key/value is a member of map
+ + `System::help_exact_matches` *s* -  return a list of exact docstring matches
 
- + `Map::nth` *m k* - take value from map with key
+ + `System::help_inexact_matches` *s* -  return a list of inexact docstring matches
 
- + `Map::nth_total` *c m k* - take value from map with key or return constant
+ + `System::help` -  search for information
 
- + `Map::new_node` *k v l r* - create a new node
+## calculate.eg
 
- + `Map::glue` *m0 m1* - glue two maps together
+Calculations are small abstractions where some computation is done
+modulo some state.
 
- + `Map::change` *f m* - change a map with a key and an update function (option value to option value)
+All calculations are chained actions. An action is a function which 
+gets as an arguments a state and returns a tuple of a result and a
+state.
 
- + `Map::insert` *k v m* - insert key/value into map
 
- + `Map::delete` *k m* - delete key from map
+ + `Calculate::return` *a* -  calculate further with value
 
- + `Map::remove` *k v m* - remove key/value from map
+ + `Calculate::chain` *f g* -  chain two calculations
 
- + `Map::foldr_key` *f c m* - foldr with value and key/value accumulator function
+ + `Calculate::run` *f s* -  run calculation on state
 
- + `Map::foldl_key` *f c m* - foldl with value and key/value accumulator function
+ + `Calculate::<*` *f g* -  chain
 
- + `Map::foldm_key` *f c m* - foldm with value and key/value accumulator function
+ + `Calculate::skip` -  return a none
 
- + `Map::foldr` *f c m* - foldr with value and accumulator function
+ + `Calculate::apply` *f g* -  apply a function to a calculation
 
- + `Map::foldl` *f c m* - foldl with value and accumulator function
+ + `Calculate::modify` *f g* -  modify state
 
- + `Map::foldm` *f c m* - foldm with value and accumulator function
+ + `Calculate::<@` *f g* -  apply
 
- + `Map::apply` *f m* - map f to values in map
+ + `Calculate::<+` *f g* -  modify
 
- + `Map::to_up_list` *m* - map to increasing list of key/value tuples
+## search.eg
 
- + `Map::to_down_list` *f m* - map to decreasing list of key/value tuples
+Searching is calculation over a state, minimalist theory.
 
- + `Map::to_list` *m* - map to list
+ + `Search::success` *a* -  succeed with value a
 
- + `Map::from_list` *l* - list to map
+ + `Search::fail` -  fail an alternative
 
- + `Map::position` *m k* - position of key in map
+ + `Search::raise` -  fail all alternatives
 
- + `Map::domain` *m* - the keys in the map
+ + `Search::message` *m* -  fail or raise with message
 
- + `Map::range` *m* - the values in the map
+ + `Search::parallel` *p q* -  try both alternatives
 
- + `Map::any` *p m* - has a key/value in map satisfying predicate
+ + `Search::sequential` -  try alternatives sequentially
 
- + `Map::all` *p m* - all key/value in map satisfy predicate
+ + `Search::serial` *p q* -  try alternative, then force the next
 
- + `Map::filter` *p m* - filter all key/value in map satisfy predicate
+ + `Search::apply` *p f* -  apply to the argument being calculated
 
- + `Map::union` *m0 m1* - union of two maps
+ + `Search::opt` *p v* -  optionally succeed with a value
 
- + `Map::intersection` *m0 m1* - intersection of two maps
+ + `Search::serial_opt` *p q* -  optionally succeed with value
 
- + `Map::inverse` *m* - construct inverse of a map
+ + `Search::<+>` *p q* -  try both alternatives  
 
- + `Map::compose` *m0 m1* - compose two maps
+ + `Search::<->` *p q* -  try composition of alternatives
 
- + `Map::decompose` *m* - decompose a map into two maps with integers 
+ + `Search::<*>` *p q* -  try alternative then force
 
- + `Map::partition` *f m* - partition with a function which maps key/value to part
+ + `Search::</>` *p q* -  try alternative then optionally
 
-## <egel/include/generator.eg>
+ + `Search::<@>` *p f* -  apply function to the result
 
- + `Gen::to_list` *g* - generator to list
+ + `Search::<!>` *p m* -  set the failure message
 
- + `Gen::from_list` *l* - list to generator
+ + `Search::one` *p* -  one time and return a singleton result
 
- + `Gen::length` *l* - length of a list
+ + `Search::plus` *p* -  one or more and return a list result
 
- + `Gen::foldl` *f z l* - left fold on a list
+ + `Search::star` *p* -  zero or more and return a list result
 
- + `Gen::foldr` *f z l* - right fold on a list
+ + `Search::plus_sep` *p s* -  one or more with separator
 
- + `Gen::head` *l* - head of a list
+ + `Search::star_sep` *p s* -  zero or more with separator
 
- + `Gen::tail` *l* - tail of a list
+ + `Search::search` *p f t e s* -  search on state with three handlers
 
- + `Gen::++` *l0 l1* - concatenation of two lists
+## generator.eg
 
- + `Gen::map` *f l* - map a function over a list
+Generators model infinite list structures.
 
- + `Gen::reverse` *l* - reverse a list
+ + `Gen::to_list` *g* -  generator to list
 
- + `Gen::block` *n* - list of number from lower to upper exclusive
+ + `Gen::from_list` *l* -  list to generator
 
- + `Gen::nth` *n l* - nth element of a list
+ + `Gen::length` *l* -  length of a list
 
- + `Gen::insert` *n x l* - insert an element at given position
+ + `Gen::foldl` *f z l* -  left fold on a list
 
- + `Gen::take` *n l* - take the first elements of a list
+ + `Gen::foldr` *f z l* -  right fold on a list
 
- + `Gen::drop` *n l* - drop the first elements of a list
+ + `Gen::head` *l* -  head of a list
 
- + `Gen::repeat` *n* - infinite list of elements
+ + `Gen::tail` *l* -  tail of a list
 
- + `Gen::cycle` *l* - infinite list of cycling list
+ + `Gen::++` *l0 l1* -  concatenation of two lists
 
- + `Gen::from` *min* - list of numbers from min 
+ + `Gen::map` *f l* -  map a function over a list
 
- + `Gen::from_to` *min max* - list of numbers for min to max (exclusive)
+ + `Gen::reverse` *l* -  reverse a list
 
- + `Gen::filter` *p l* - filter all members from a list which satisfy a predicate
+ + `Gen::block` *n* -  list of number from lower to upper exclusive
 
- + `Gen::flatten` *ll* - flatten a list of lists to a list
+ + `Gen::nth` *n l* -  nth element of a list
 
- + `Gen::zip` *l0 l1* - zip to lists to a list of pairs
+ + `Gen::insert` *n x l* -  insert an element at given position
 
- + `Gen::zip_with` *f l0 l1* - apply a function pairwise to members of two lists
+ + `Gen::take` *n l* -  take the first elements of a list
 
- + `Gen::any` *p l* - checks whether any element of a list satisfies a predicate
+ + `Gen::drop` *n l* -  drop the first elements of a list
 
- + `Gen::all` *p l* - checks whether all elements of a list  satisfies a predicate
+ + `Gen::repeat` *n* -  infinite list of elements
 
- + `Gen::elem` *x l* - membership test
+ + `Gen::cycle` *l* -  infinite list of cycling list
 
- + `Gen::not_elem` *x l* - inverse membership test
+ + `Gen::from` *min* -  list of numbers from min 
 
- + `Gen::from_lists` *l* - convert a list of lists to generator of generators
+ + `Gen::from_to` *min max* -  list of numbers for min to max (exclusive)
 
- + `Gen::to_lists` *c* - convert generator of generators to list of lists
+ + `Gen::filter` *p l* -  filter all members from a list which satisfy a predicate
 
- + `Gen::range` *l f* - iterate over elements (reverse map
+ + `Gen::flatten` *ll* -  flatten a list of lists to a list
 
- + `Gen::range2` *l0 l1 f* - iterate over elements of two lists
+ + `Gen::zip` *l0 l1* -  zip to lists to a list of pairs
 
- + `Gen::range3` *l0 l1 l2 f* - iterate over elements of three lists
+ + `Gen::zip_with` *f l0 l1* -  apply a function pairwise to members of two lists
+
+ + `Gen::any` *p l* -  checks whether any element of a list satisfies a predicate
+
+ + `Gen::all` *p l* -  checks whether all elements of a list  satisfies a predicate
+
+ + `Gen::elem` *x l* -  membership test
+
+ + `Gen::not_elem` *x l* -  inverse membership test
+
+ + `Gen::from_lists` *l* -  convert a list of lists to generator of generators
+
+ + `Gen::to_lists` *c* -  convert generator of generators to list of lists
+
+ + `Gen::space` -  space, the final frontier
+
+ + `Gen::map_2d` -  map on a space
+
+ + `Gen::take_2d` -  take a block 
+
+ + `Gen::range` *l f* -  iterate over elements (reverse map
+
+ + `Gen::range2` *l0 l1 f* -  iterate over elements of two lists
+
+ + `Gen::range3` *l0 l1 l2 f* -  iterate over elements of three lists
 
