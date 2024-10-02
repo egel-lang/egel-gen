@@ -4,11 +4,9 @@
 import "prelude.eg"
 import "calculate.eg"
 import "search.eg"
-import "map.eg"
+#import "map.eg"
 import "generator.eg"
 import "dictionary.eg"
-import "os.ego"
-import "fs.ego"
 import "random.ego"
 
 using System
@@ -18,11 +16,13 @@ using List
 
 val builtins = { 
         "system",
+        "async",
         "math",
         "string",
-        "regex",
         "dict",
-        "async",
+        "regex",
+        "os",
+        "fs",
         "eval",
         "runtime",
         "time",
@@ -30,13 +30,12 @@ val builtins = {
 }
 
 val dynamic = {
-        "os",
-        "fs",
         "random"
 }
 
 val preludes = {
         "prelude.eg",
+        "dictionary.eg",
         "calculate.eg",
         "search.eg",
         "generator.eg"
