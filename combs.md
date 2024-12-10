@@ -50,7 +50,11 @@ The 'system' module defines primitive combinators.
 
  + `System::to_float` *x* -  try and convert an object to float
 
+ + `System::to_complex` *x* -  try and convert an object to complex
+
  + `System::to_text` *x* -  try and convert an object to text
+
+ + `System::from_complex` *z* -  convert complex to tuple
 
  + `String::to_chars` *s* -  create a list of chars from a string
 
@@ -62,9 +66,13 @@ The 'system' module defines primitive combinators.
 
  + `System::get_env` *s* -  the value of environment variable, or none
 
- + `System::args_to_list` *o0 .. on* -  arguments to list
+ + `System::app_to_list` *o0 .. on* -  arguments to list
 
  + `System::list_to_app` *{o0 .. on}* -  list to application
+
+ + `System::tuple_to_list` *(o0, .., on)* -  tuple to list
+
+ + `System::list_to_tuple` *{o0, .., on}* -  list to tuple
 
  + `System::print` *o0 .. on* -  print terms
 
@@ -77,6 +85,20 @@ The 'system' module defines primitive combinators.
  + `System::set_ref` *ref x* -  set reference objec
 
  + `System::get_ref` *ref* -  dereference
+
+## async
+
+The 'async' module defines concurrency combinators.
+
+ + `System::async` *f* -  create a task
+
+ + `System::await` *f* -  wait for async task
+
+ + `System::wait_for` *f n* -  check whether future reduced during milliseconds
+
+ + `System::is_valid` *f* -  check whether future is reduced
+
+ + `System::sleep` *n* -  sleep for a number of milliseconds
 
 ## math
 
@@ -98,19 +120,19 @@ The 'math' module defines trigonometic and some other often used combinators.
 
  + `Math::sqrt2` -  square root of 2, approximately 1.414
 
- + `Math::abs` *x* -  the absolute value of a number
+ + `Math::abs` *x* -  the absolute value of a (complex) number
 
- + `Math::acos` *x* -  the arccosine of a number
+ + `Math::acos` *x* -  the arccosine of a (complex) number
 
- + `Math::acosh` *x* -  the hyperbolic arccosine of a number
+ + `Math::acosh` *x* -  the hyperbolic arccosine of a (complex) number
 
- + `Math::asin` *x* -  the arcsine of a number
+ + `Math::asin` *x* -  the arcsine of a (complex) number
 
- + `Math::asinh` *x* -  the hyperbolic arcsine of a number
+ + `Math::asinh` *x* -  the hyperbolic arcsine of a (complex) number
 
- + `Math::atan` *x* -  the arctangent of a number
+ + `Math::atan` *x* -  the arctangent of a (complex) number
 
- + `Math::atanh` *x* -  the hyperbolic arctangent of a number
+ + `Math::atanh` *x* -  the hyperbolic arctangent of a (complex) number
 
  + `Math::atan2` *y x* -  the arctangent of the quotient of its arguments
 
@@ -118,21 +140,21 @@ The 'math' module defines trigonometic and some other often used combinators.
 
  + `Math::ceil` *x* -  the ceiling of a number
 
- + `Math::cos` *x* -  the cosine of a number
+ + `Math::cos` *x* -  the cosine of a (complex) number
 
- + `Math::cosh` *x* -  the hyperbolic cosine of a number
+ + `Math::cosh` *x* -  the hyperbolic cosine of a (complex) number
 
- + `Math::exp` *x* -  the exp of a number
+ + `Math::exp` *x* -  the exp of a (complex) number
 
  + `Math::expm1` *x* -  subtracting 1 from exp
 
  + `Math::floor` *x* -  the largest integer less than or equal to a number
 
- + `Math::log` *x* -  the natural logarithm (loge, also ln) of a number
+ + `Math::log` *x* -  the natural logarithm (loge, also ln) of a (complex) number
 
  + `Math::log1p` *x* -  the natural logarithm of the next number
 
- + `Math::log10` *x* -  the base 10 logarithm of a number
+ + `Math::log10` *x* -  the base 10 logarithm of a (complex) number
 
  + `Math::log2` *x* -  the base 2 logarithm of a number
 
@@ -140,7 +162,7 @@ The 'math' module defines trigonometic and some other often used combinators.
 
  + `Math::min` *x y* -  the smallest of two numbers
 
- + `Math::pow` *x y* -  base to the exponent power, that is, baseexponent
+ + `Math::pow` *x y* -  base to the exponent power, that is, baseexponent of a (complex) number
 
  + `Math::random` -  a pseudo-random number between 0 and 1
 
@@ -148,17 +170,21 @@ The 'math' module defines trigonometic and some other often used combinators.
 
  + `Math::sign` *x* -  the sign of the a number
 
- + `Math::sin` *x* -  the sine of a number
+ + `Math::sin` *x* -  the sine of a (complex) number
 
- + `Math::sinh` *x* -  the hyperbolic sine of a number
+ + `Math::sinh` *x* -  the hyperbolic sine of a (complex) number
 
- + `Math::sqrt` *x* -  the positive square root of a number
+ + `Math::sqrt` *x* -  the positive square root of a (complex) number
 
- + `Math::tan` *x* -  the tangent of a number
+ + `Math::tan` *x* -  the tangent of a (complex) number
 
- + `Math::tanh` *x* -  the hyperbolic tangent of a number
+ + `Math::tanh` *x* -  the hyperbolic tangent of a (complex) number
 
  + `Math::trunc` *x* -  the integral part of a number
+
+ + `Math::conj` *z* -  complex conjugate
+
+ + `Math::proj` *z* -  projection on Riemann sphere
 
 ## string
 
@@ -206,7 +232,7 @@ The 'string' module defines string manipulation combinators.
 
  + `String::append` *s0 s1* -  append two texts
 
- + `String::insert` *s0 n s1* -  insert at given position
+ + `String::insert_at` *s0 n s1* -  insert at given position
 
  + `String::replace` *s0 s1 s2* -  replace all occurrences
 
@@ -230,6 +256,24 @@ The 'string' module defines string manipulation combinators.
 
  + `String::unescape` *s* -  unescape characters
 
+## dict
+
+The 'dict' module defines mutable dictionaries.
+
+ + `Dict::dict` -  create a dict object
+
+ + `Dict::has` *d k* -  check for key
+
+ + `Dict::get` *d k* -  get a value by key
+
+ + `Dict::set` *d k v* -  set a value by key
+
+ + `Dict::erase` *d k* -  erase a value by key
+
+ + `Dict::keys` *d* -  dictionary keys as list
+
+ + `Dict::size` *d* -  size of the dictionary
+
 ## regex
 
 The 'regex' module defines operations on regular expressions.
@@ -251,128 +295,6 @@ The 'regex' module defines operations on regular expressions.
  + `Regex::replace_all` *pat s0 s1* -  replace all occurences of a pattern 
 
  + `Regex::group` *pat s0* -  the matched groups in a string
-
-## dict
-
-The 'dict' module defines mutable dictionaries.
-
- + `Dict::dict` -  create a dict object
-
- + `Dict::has` *d k* -  check for key
-
- + `Dict::get` *d k* -  get a value by key
-
- + `Dict::set` *d k v* -  set a value by key
-
- + `Dict::erase` *d k* -  erase a value by key
-
- + `Dict::keys` *d* -  dictionary keys as list
-
-## async
-
-The 'async' module defines concurrency combinators.
-
- + `System::async` *f* -  create a task
-
- + `System::await` *f* -  wait for async task
-
- + `System::wait_for` *f n* -  check whether future reduced during milliseconds
-
- + `System::is_valid` *f* -  check whether future is reduced
-
- + `System::sleep` *n* -  sleep for a number of milliseconds
-
-## eval
-
-The 'eval' module defines the eval combinator.
-
- + `System::eval` *text* -  evaluatate the expression in `text`
-
-## runtime
-
-The 'runtime' module provides binding to the runtime.
-
- + `System::dis` *o* -  disassemble a combinator object
-
- + `System::asm` *s* -  assemble bytecode into a combinator
-
- + `System::serialize` *t* -  serialize a term to a text
-
- + `System::deserialize` *t* -  serialize a text to a term
-
- + `System::docstring` *o* -  docstring of a module or combinator
-
- + `System::query_modules` -  list all modules in the runtime
-
- + `System::is_module` *m* -  check we have a module
-
- + `System::query_module_name` *m* -  get the name of the module
-
- + `System::query_module_path` *m* -  get the path of the module
-
- + `System::query_module_imports` *m* -  get the imports of the module
-
- + `System::query_module_exports` *m* -  get the exports of the module
-
- + `System::query_module_values` *m* -  get the values of the module
-
-## time
-
-The 'time' module defines time and date combinators.
-
- + `Time::clock` *s* -  create a clock object
-
- + `Time::now` *c* -  current time according to a clock
-
- + `Time::is_steady` *c* -  is a steady clock
-
- + `Time::milliseconds` *n* -  a number of milliseconds
-
- + `Time::seconds` *n* -  a number of seconds
-
- + `Time::minutes` *n* -  a number of minutes
-
- + `Time::hours` *n* -  a number of hours
-
- + `Time::days` *n* -  a number of days
-
- + `Time::weeks` *n* -  a number of weeks
-
- + `Time::months` *n* -  a number of months
-
- + `Time::years` *n* -  a number of years
-
- + `Time::local_time` *n* -  time point to local date
-
- + `Time::gm_time` *n* -  time point to gm date
-
- + `Time::date_to_time` *n* -  date to time point
-
- + `Time::date_to_tuple` *n* -  date to tuple
-
- + `Time::date_from_tuple` *n* -  date from tuple
-
-## ffi
-
-The 'ffi' module defines c foreign interface combinators.
-
- + `FFI::load_library` *s* -  load a library
-
- + `FFI::function` *l s* -  find a function
-
- + `FFI::call` *f r x* -  call a function
-
- + `FFI::malloc` *n* -  allocate a number of bytes
-
- + `FFI::free` *p* -  free memory
-
- + `FFI::peek` *p n t* -  peek a number of bytes beyond for value of type
-
- + `FFI::poke` *p n v* -  poke a value a number of bytes beyond pointer
-
- + `FFI::to_utf8` *s* -  get pointer from text
-
- + `FFI::from_utf8` *s* -  get text from pointer
 
 ## os
 
@@ -498,7 +420,7 @@ The 'fs' module defines file system inspection and modification combinators.
 
  + `OS::read_symlink` *p* -  obtains the target of a symbolic link
 
- + `OS::remove` *p* -  removes a file or empty directory
+ + `OS::remove_file` *p* -  removes a file or empty directory
 
  + `OS::remove_all` *p* -  removes a file or directory and all its contents
 
@@ -520,7 +442,7 @@ The 'fs' module defines file system inspection and modification combinators.
 
  + `OS::is_directory` *p* -  checks whether the given path refers to a directory
 
- + `OS::is_empty` *p* -  checks whether the given path refers to an empty file or
+ + `OS::is_empty_file` *p* -  checks whether the given path refers to an empty file
 
  + `OS::is_fifo` *p* -  checks whether the given path refers to a named pipe
 
@@ -533,6 +455,126 @@ The 'fs' module defines file system inspection and modification combinators.
  + `OS::is_symlink` *p* -  checks whether the argument refers to a symbolic link
 
  + `OS::directory` *p* -  lists the content of a directory
+
+## eval
+
+The 'eval' module defines the eval combinator.
+
+ + `System::eval` *text* -  evaluatate the expression in `text`
+
+## runtime
+
+The 'runtime' module provides binding to the runtime.
+
+ + `System::dis` *o* -  disassemble a combinator object
+
+ + `System::asm` *s* -  assemble bytecode into a combinator
+
+ + `System::serialize` *t* -  serialize a term to a text
+
+ + `System::deserialize` *t* -  serialize a text to a term
+
+ + `System::tokenize` *uri s* -  use builtin tokenize
+
+ + `System::docstring` *o* -  docstring of a module or combinator
+
+ + `System::query_modules` -  list all modules in the runtime
+
+ + `System::is_module` *m* -  check we have a module
+
+ + `System::query_module_name` *m* -  get the name of the module
+
+ + `System::query_module_path` *m* -  get the path of the module
+
+ + `System::query_module_imports` *m* -  get the imports of the module
+
+ + `System::query_module_exports` *m* -  get the exports of the module
+
+ + `System::query_module_values` *m* -  get the values of the module
+
+ + `System::is_integer` *o* -  test for integer
+
+ + `System::is_float` *o* -  test for float
+
+ + `System::is_character` *o* -  test for character
+
+ + `System::is_text` *o* -  test for text
+
+ + `System::is_combinator` *o* -  test for combinator
+
+ + `System::is_opaque` *o* -  test for opaque value
+
+ + `System::is_array` *o* -  test for array value
+
+ + `System::is_bytecode` *o* -  test for bytecode value
+
+ + `System::get_array` *o* -  array to list
+
+ + `System::get_bytecode` *o* -  get_bytecode
+
+ + `System::get_bytedata` *o* -  get_bytedata
+
+ + `System::dependencies` *o* -  dependencies of term
+
+ + `System::debug_ptr` *o* -  raw pointer to object
+
+## time
+
+The 'time' module defines time and date combinators.
+
+ + `Time::clock` *s* -  create a clock object
+
+ + `Time::now` *c* -  current time according to a clock
+
+ + `Time::is_steady` *c* -  is a steady clock
+
+ + `Time::milliseconds` *n* -  a number of milliseconds
+
+ + `Time::seconds` *n* -  a number of seconds
+
+ + `Time::minutes` *n* -  a number of minutes
+
+ + `Time::hours` *n* -  a number of hours
+
+ + `Time::days` *n* -  a number of days
+
+ + `Time::weeks` *n* -  a number of weeks
+
+ + `Time::months` *n* -  a number of months
+
+ + `Time::years` *n* -  a number of years
+
+ + `Time::local_time` *n* -  time point to local date
+
+ + `Time::gm_time` *n* -  time point to gm date
+
+ + `Time::date_to_time` *n* -  date to time point
+
+ + `Time::date_to_tuple` *n* -  date to tuple
+
+ + `Time::date_from_tuple` *n* -  date from tuple
+
+## ffi
+
+The 'ffi' module defines c foreign interface combinators.
+
+ + `FFI::load_library` *s* -  load a library
+
+ + `FFI::function` *l s* -  find a function
+
+ + `FFI::call` *f r x* -  call a function
+
+ + `FFI::malloc` *n* -  allocate a number of bytes
+
+ + `FFI::free` *p* -  free memory
+
+ + `FFI::peek` *p n t* -  peek a number of bytes beyond for value of type
+
+ + `FFI::poke` *p n v* -  poke a value a number of bytes beyond pointer
+
+ + `FFI::to_utf8` *s* -  get pointer from text
+
+ + `FFI::from_utf8` *s* -  get text from pointer
 
 ## random
 
@@ -567,6 +609,10 @@ The 'prelude' defines often used combinators.
 
  + `System::flip` *f x y* -  flip two arguments
 
+ + `System::const` *x* -  function that returns a constant
+
+ + `System::ap` *f g x* -  f x (g x)
+
  + `System::join` *f x* -  f x x
 
  + `System::uncurry` *f (x, y)* -  uncurry arguments
@@ -577,27 +623,37 @@ The 'prelude' defines often used combinators.
 
  + `System::trace_until` *f g x* -  trace until a guard holds
 
- + `System::trace_while` *f g x* -  trace while a guard holds
+ + `System::trace_while` *p f x* -  trace while a guard holds
 
  + `System::while` *f x* -  apply f as long as it reduces
+
+ + `System::iter_fix` *f x* -  apply f until a fixed point is reached
+
+ + `System::iter_while` *p f x* -  apply f while a guard holds
 
  + `System::swap` *(x,y)* -  swap a tuple
 
  + `System::proj` *n (x, .., y)* -  projection on tuple
 
+ + `System::proj_update` *n f (x, .., y)* -  update on tuple
+
  + `System::fst` *(x, y)* -  proj1 on tuple
 
  + `System::snd` *(x, y)* -  proj2 on tuple
 
- + `System::abs` *x* -  absolute
+ + `System::dup` *x* -  duplicate
 
- + `System::min` *x y* -  minimum
+ + `System::abs0` *x* -  generic absolute
 
- + `System::max` *x y* -  maximum
+ + `System::min0` *x y* -  generic minimum
+
+ + `System::max0` *x y* -  generic maximum
 
  + `System::**` *x y* -  power (temporary)
 
  + `System::printf` *s x0 .. xn* -  print formatted
+
+ + `List::singleton` *x* -  list with one value
 
  + `List::length` *l* -  length of a list
 
@@ -608,6 +664,10 @@ The 'prelude' defines often used combinators.
  + `List::scanl` *f z l* -  left scan on a list
 
  + `List::reduce` *f l* -  reduce on non-empty list
+
+ + `List::foldl_state` *f s z l* -  left fold on a list with a state
+
+ + `List::foldr_state` *f s z l* -  right fold on a list with a state
 
  + `List::head` *l* -  head of a list
 
@@ -627,7 +687,7 @@ The 'prelude' defines often used combinators.
 
  + `List::map` *f l* -  map a function over a list
 
- + `List::concat_map` *f l* -  map a function producing lists over a list
+ + `List::flatmap` *f l* -  map a function producing lists over a list
 
  + `List::reverse` *l* -  reverse a list
 
@@ -643,7 +703,9 @@ The 'prelude' defines often used combinators.
 
  + `List::nth` *n l* -  nth element of a list
 
- + `List::index_of` *x xx* -  index of a member in list
+ + `List::nth_update` *n f l* -  update nth element of a list
+
+ + `List::index` *x xx* -  index of a member in list
 
  + `List::insert` *n x l* -  insert an element at given position
 
@@ -660,6 +722,8 @@ The 'prelude' defines often used combinators.
  + `List::filter` *p l* -  filter all members from a list which satisfy a predicate
 
  + `List::split` *p l* -  split a list into members and non-members of a predicate
+
+ + `List::span` *p l* -  split a list where the first segment satisfies a predicate
 
  + `List::break` *p l* -  split a list in two parts
 
@@ -717,13 +781,57 @@ The 'prelude' defines often used combinators.
 
  + `System::args` -  arguments of the application
 
- + `String::split` *n s* -  split a spring
+ + `String::split` *n s* -  split a string
+
+ + `String::split_pattern` *p s* -  split a string
+
+ + `System::succ` *xx* -  generic multidimensional succ
+
+ + `System::add` *xx yy* -  generic multidimensional add
+
+ + `System::mul` *xx yy* -  generic multidimensional mul
+
+ + `System::sub` *xx yy* -  generic multidimensional sub
 
  + `Math::lift_unary` *f* -  lift a unary function on floats to ints
 
  + `Math::lift_binary` *f* -  lift a binary function on floats to ints
 
  + `Math::pow_int` *n0 n1* -  power of two integer values
+
+ + `String::memo` *d f x* -  memoize with a dictionary
+
+ + `Dict::from_list` *l* -  create a dictionary from key/value pairs
+
+ + `Dict::to_list` *d* -  create a list of key/value pairs from a dictionary
+
+ + `Dict::values` *d* -  create a list of values a dictionary
+
+ + `Dict::set_with` *d f k v* -  set a value with a function
+
+ + `Dict::get_with_default` *v d k* -  get a value from a dictionary with a default element
+
+ + `Dict::copy` *d* -  create a copy of a dictionary
+
+ + `Dict::copy` *d k v* -  change an entry when key is present
+
+ + `Dict::adjust` *d k f* -  apply a function to a value in the dictionary
+
+ + `Dict::dmap` *f d* -  map a function to all values of a dictionary
+
+ + `Dict::merge_dicts` *d0 d1* -  produce the merger of two dictionaries
+
+ + `Dict::count` *ll* -  count the values in a list
+
+ + `Dict::invert` *d0 d1* -  produce the merger of two dictionaries
+
+ + `Dict::inverse` *d* -  produce the inverse of a dictionary, values map to multiple keys
+
+ + `Dict::inner_join` *d0 d1* -  inner join on keys
+
+ + `Dict::from_lists` *lll* -  create dictionary from arbitrarily nested lists
+
+ + `OS::read_lines` *c* -  read all lines from a channel
 
  + `System::help_exact_matches` *s* -  return a list of exact docstring matches
 
@@ -787,7 +895,7 @@ Searching is calculation over a state, minimalist theory.
 
  + `Search::<->` *p q* -  try composition of alternatives
 
- + `Search::<*>` *p q* -  try alternative then force
+ + `Search::<**>` *p q* -  try alternative then force
 
  + `Search::</>` *p q* -  try alternative then optionally
 

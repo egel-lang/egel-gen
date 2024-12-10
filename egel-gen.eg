@@ -4,9 +4,7 @@
 import "prelude.eg"
 import "calculate.eg"
 import "search.eg"
-#import "map.eg"
 import "generator.eg"
-import "dictionary.eg"
 import "random.ego"
 
 using System
@@ -35,7 +33,6 @@ val dynamic = {
 
 val preludes = {
         "prelude.eg",
-        "dictionary.eg",
         "calculate.eg",
         "search.eg",
         "generator.eg"
